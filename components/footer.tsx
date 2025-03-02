@@ -3,6 +3,8 @@ import { Bike, Mail, Phone, Instagram, Facebook, Twitter } from "lucide-react";
 import Image from "next/image";
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+  
   return (
     <footer className="w-full border-t bg-background">
       <div className="container py-8 md:py-12">
@@ -22,15 +24,15 @@ export function Footer() {
               Persoonlijke fietsreparatie door studenten, voor studenten. Betaalbaar, snel en gemakkelijk.
             </p>
             <div className="flex items-center gap-4">
-              <Link href="https://instagram.com" className="text-muted-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
+              <Link href="https://instagram.com/fixmijnbike" className="text-muted-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="https://facebook.com" className="text-muted-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
+              <Link href="https://facebook.com/fixmijnbike" className="text-muted-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="https://twitter.com" className="text-muted-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
+              <Link href="https://twitter.com/fixmijnbike" className="text-muted-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
@@ -116,7 +118,7 @@ export function Footer() {
         
         <div className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} FixMijnBike. Alle rechten voorbehouden.
+            © {currentYear} FixMijnBike. Alle rechten voorbehouden.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/terms" className="text-xs text-muted-foreground hover:text-primary transition-colors">

@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Wrench, Euro, Clock, CheckCircle, ArrowRight, Star, Bike } from "lucide-react";
 import Image from "next/image";
-import { motion } from "framer-motion"; // Added for animations
+import { motion } from "framer-motion";
+import { ServiceSchema } from "@/components/structured-data";
 
 export default function BecomeFixerPage() {
   const router = useRouter();
@@ -47,6 +48,27 @@ export default function BecomeFixerPage() {
 
   return (
     <div className="flex flex-col items-center w-full bg-gray-50">
+      {/* Structured Data */}
+      <ServiceSchema
+        name="Verdien als Fixer bij FixMijnBike"
+        description="Verdien geld met je fietsreparatievaardigheden. Help medestudenten met hun fietsreparaties en verdien €5-€15 per uur in je vrije tijd."
+        provider={{
+          name: "FixMijnBike",
+          url: "https://fixmijnbike.nl"
+        }}
+        serviceArea={[
+          { name: "Amsterdam", type: "City" },
+          { name: "Utrecht", type: "City" },
+          { name: "Rotterdam", type: "City" },
+          { name: "Groningen", type: "City" },
+          { name: "Nederland", type: "Country" }
+        ]}
+        offers={[
+          { price: "3.00", priceCurrency: "EUR", description: "Platformvergoeding per reparatie" },
+          { price: "5.00-15.00", priceCurrency: "EUR", description: "Uurtarief voor reparaties" }
+        ]}
+      />
+      
       {/* Hero Section */}
       <section className="w-full py-16 md:py-24 bg-gradient-to-br from-blue-50 via-orange-50 to-white">
         <div className="container px-4 md:px-6">
@@ -108,7 +130,7 @@ export default function BecomeFixerPage() {
                 transition={{ delay: index * 0.2, duration: 0.5 }}
                 className={`flex flex-col items-center space-y-4 p-6 rounded-xl border-${step.color}-200 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300`}
               >
-                <div className={`p-3 rounded-full bg-${step.color}-100`}>
+                <div className={`p-3 rounded-full bg-${step.color}-100 mb-4`}>
                   <step.icon className={`h-8 w-8 text-${step.color}-600`} />
                 </div>
                 <h3 className="text-xl font-bold">{index + 1}. {step.title}</h3>
@@ -120,7 +142,7 @@ export default function BecomeFixerPage() {
       </section>
 
       {/* Benefits */}
-      <section className="w-full py-16 bg-gradient-to-r from-blue-50 to-orange-50">
+      <section className="w-full py-16 md:py-24 bg-gradient-to-r from-blue-50 to-orange-50">
         <div className="container px-4 md:px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <motion.div 
@@ -130,7 +152,7 @@ export default function BecomeFixerPage() {
               className="relative h-[500px] rounded-xl overflow-hidden shadow-xl"
             >
               <Image 
-                src="/bikefixing.jpg"
+                src="/images/bikefixing.jpg"
                 alt="Student repairing a bicycle"
                 fill
                 style={{ objectFit: 'cover' }}
@@ -197,9 +219,9 @@ export default function BecomeFixerPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
             {[
-              { name: "Tim", uni: "TU Delft", quote: "Als student heb ik altijd al een passie gehad voor fietsen. Nu verdien ik €150-€200 per week extra!", img: "/tim.jpg", color: "blue" },
-              { name: "Lisa", uni: "UvA", quote: "Ik repareer al jaren fietsen als hobby. FixMijnBike heeft me geholpen om dit om te zetten in een leuke bijbaan.", img: "/lisa.jpg", color: "orange" },
-              { name: "Martijn", uni: "RUG", quote: "Het platform is super gebruiksvriendelijk. Ik kan mijn beschikbaarheid aanpassen wanneer ik wil.", img: "/martijn.jpg", color: "pink" },
+              { name: "Tim", uni: "TU Delft", quote: "Als student heb ik altijd al een passie gehad voor fietsen. Nu verdien ik €150-€200 per week extra!", img: "/images/tim.jpg", color: "blue" },
+              { name: "Lisa", uni: "UvA", quote: "Ik repareer al jaren fietsen als hobby. FixMijnBike heeft me geholpen om dit om te zetten in een leuke bijbaan.", img: "/images/lisa.jpg", color: "orange" },
+              { name: "Martijn", uni: "RUG", quote: "Het platform is super gebruiksvriendelijk. Ik kan mijn beschikbaarheid aanpassen wanneer ik wil.", img: "/images/martijn.jpg", color: "pink" },
             ].map((testimonial, index) => (
               <motion.div
                 key={index}

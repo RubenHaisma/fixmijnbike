@@ -4,11 +4,62 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Recycle as Bicycle, Wrench, ArrowRight, Star, Euro, Clock, CheckCircle, MapPin, Shield, Award, ThumbsUp } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion'; // Added for animations
+import { motion } from 'framer-motion';
+import { FAQSchema, ServiceSchema } from '@/components/structured-data';
 
 export default function HowItWorksPage() {
   return (
     <div className="flex flex-col items-center bg-gray-50">
+      {/* Structured Data */}
+      <FAQSchema
+        questions={[
+          {
+            question: "Hoe snel kan mijn fiets gerepareerd worden?",
+            answer: "Meestal binnen 24-48 uur, afhankelijk van fixer-beschikbaarheid."
+          },
+          {
+            question: "Wat als de reparatie niet lukt?",
+            answer: "Je betaalt alleen de platformkosten als de reparatie niet lukt."
+          },
+          {
+            question: "Hoe worden reparatiekosten bepaald?",
+            answer: "Gebaseerd op het uurtarief van de fixer (€5-€15) en de tijd."
+          },
+          {
+            question: "Kan ik een specifieke fixer kiezen?",
+            answer: "Momenteel automatisch gematcht, keuze komt in de toekomst."
+          },
+          {
+            question: "Wat als ik mijn afspraak annuleer?",
+            answer: "Kosteloos tot 2 uur voor de afspraak, anders platformkosten."
+          },
+          {
+            question: "Zijn de fixers gekwalificeerd?",
+            answer: "Fixers geven hun vaardigheden aan en bouwen reputatie op via reviews."
+          }
+        ]}
+      />
+      
+      <ServiceSchema
+        name="Fietsreparatie voor Studenten"
+        description="Betaalbare fietsreparatie door studenten, voor studenten. Lekke band? Piepende remmen? Vind een student-fixer in jouw buurt die je snel en betaalbaar helpt."
+        provider={{
+          name: "FixMijnBike",
+          url: "https://fixmijnbike.nl"
+        }}
+        serviceArea={[
+          { name: "Amsterdam", type: "City" },
+          { name: "Utrecht", type: "City" },
+          { name: "Rotterdam", type: "City" },
+          { name: "Groningen", type: "City" },
+          { name: "Nederland", type: "Country" }
+        ]}
+        offers={[
+          { price: "4.00", priceCurrency: "EUR", description: "Platformkosten per reparatie" },
+          { price: "5.00-15.00", priceCurrency: "EUR", description: "Uurtarief voor reparaties" }
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-orange-50 via-blue-50 to-white">
         <div className="container px-4 md:px-6">
@@ -57,7 +108,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* For Riders */}
-      <section className="w-full py-16 md:py-24 bg-white">
+      <section className="w-full py-16 md:py-24 bg-white" id="for-riders">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -78,10 +129,10 @@ export default function HowItWorksPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12 max-w-6xl mx-auto">
             {[
-              { step: 1, icon: Bicycle, title: "Beschrijf je probleem", desc: "Vertel ons wat er mis is met je fiets en upload een foto", img: "/stap1.jpg" },
-              { step: 2, icon: MapPin, title: "Vind een Fixer", desc: "We matchen je met een beschikbare student-fixer in jouw buurt", img: "/bikefixing.jpg" },
-              { step: 3, icon: Euro, title: "Betaal en boek", desc: "Betaal €4 platformkosten en plan een reparatie", img: "/stap3.jpg" },
-              { step: 4, icon: CheckCircle, title: "Fiets gerepareerd!", desc: "De fixer repareert je fiets en je betaalt alleen voor de reparatie", img: "/sophie.jpg" },
+              { step: 1, icon: Bicycle, title: "Beschrijf je probleem", desc: "Vertel ons wat er mis is met je fiets en upload een foto", img: "/images/stap1.jpg" },
+              { step: 2, icon: MapPin, title: "Vind een Fixer", desc: "We matchen je met een beschikbare student-fixer in jouw buurt", img: "/images/bikefixing.jpg" },
+              { step: 3, icon: Euro, title: "Betaal en boek", desc: "Betaal €4 platformkosten en plan een reparatie", img: "/images/stap3.jpg" },
+              { step: 4, icon: CheckCircle, title: "Fiets gerepareerd!", desc: "De fixer repareert je fiets en je betaalt alleen voor de reparatie", img: "/images/sophie.jpg" },
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -130,7 +181,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="w-full py-16 bg-gradient-to-b from-blue-50 to-white">
+      <section className="w-full py-16 bg-gradient-to-b from-blue-50 to-white" id="why-choose-us">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -157,13 +208,13 @@ export default function HowItWorksPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.5 }}
-                className="flex flex-col items-center text-center p-6 rounded-xl border border-gray-100 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className={`flex flex-col items-center space-y-4 p-6 rounded-xl border-${item.color}-200 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300`}
               >
                 <div className={`p-3 rounded-full bg-${item.color}-100 mb-4`}>
                   <item.icon className={`h-8 w-8 text-${item.color}-600`} />
                 </div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-gray-600">{item.desc}</p>
+                <p className="text-gray-600 text-center">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -171,7 +222,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* For Fixers */}
-      <section className="w-full py-16 md:py-24 bg-blue-50">
+      <section className="w-full py-16 md:py-24 bg-blue-50" id="for-fixers">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -192,10 +243,10 @@ export default function HowItWorksPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-12 max-w-6xl mx-auto">
             {[
-              { step: 1, icon: Wrench, title: "Maak je profiel aan", desc: "Meld je aan en geef aan welke reparaties je kunt doen", img: "/tim.jpg" },
-              { step: 2, icon: Euro, title: "Stel je tarief in", desc: "Kies je uurtarief tussen €5-€15", img: "/stap3.jpg" },
-              { step: 3, icon: Bicycle, title: "Ontvang reparaties", desc: "Krijg verzoeken van studenten in jouw buurt", img: "/bikefixing.jpg" },
-              { step: 4, icon: Euro, title: "Verdien geld", desc: "Ontvang €3 platformvergoeding plus je tarief", img: "/lisa.jpg" },
+              { step: 1, icon: Wrench, title: "Maak je profiel aan", desc: "Meld je aan en geef aan welke reparaties je kunt doen", img: "/images/tim.jpg" },
+              { step: 2, icon: Euro, title: "Stel je tarief in", desc: "Kies je uurtarief tussen €5-€15", img: "/images/stap3.jpg" },
+              { step: 3, icon: Bicycle, title: "Ontvang reparaties", desc: "Krijg verzoeken van studenten in jouw buurt", img: "/images/bikefixing.jpg" },
+              { step: 4, icon: Euro, title: "Verdien geld", desc: "Ontvang €3 platformvergoeding plus je tarief", img: "/images/lisa.jpg" },
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -244,7 +295,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="w-full py-16 bg-white">
+      <section className="w-full py-16 bg-white" id="testimonials">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -262,10 +313,10 @@ export default function HowItWorksPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {[
-              { name: "Emma", uni: "UvA", quote: "Mijn ketting was kapot en Joost had het in 20 minuten gefixt voor €10!", img: "/emma.jpg", color: "orange" },
-              { name: "Tim", uni: "TU Delft", quote: "Ik verdien €100 per week extra als fixer, perfect naast mijn studie!", img: "/tim.jpg", color: "blue" },
-              { name: "Sophie", uni: "RUG", quote: "Lekke band op zondag? FixMijnBike regelde het dezelfde dag nog!", img: "/sophie.jpg", color: "green" },
-              { name: "Maarten", uni: "UU", quote: "Betaalbaar, snel en betrouwbaar. Echt een aanrader voor studenten!", img: "/maarten.jpg", color: "purple" },
+              { name: "Emma", uni: "UvA", quote: "Mijn ketting was kapot en Joost had het in 20 minuten gefixt voor €10!", img: "/images/emma.jpg", color: "orange" },
+              { name: "Tim", uni: "TU Delft", quote: "Ik verdien €100 per week extra als fixer, perfect naast mijn studie!", img: "/images/tim.jpg", color: "blue" },
+              { name: "Sophie", uni: "RUG", quote: "Lekke band op zondag? FixMijnBike regelde het dezelfde dag nog!", img: "/images/sophie.jpg", color: "green" },
+              { name: "Maarten", uni: "UU", quote: "Betaalbaar, snel en betrouwbaar. Echt een aanrader voor studenten!", img: "/images/maarten.jpg", color: "purple" },
             ].map((testimonial, index) => (
               <motion.div 
                 key={index}
@@ -298,7 +349,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Pricing */}
-      <section className="w-full py-16 md:py-24 bg-white">
+      <section className="w-full py-16 md:py-24 bg-white" id="pricing">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -363,7 +414,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* Common Repairs */}
-      <section className="w-full py-16 bg-gradient-to-b from-gray-50 to-white">
+      <section className="w-full py-16 bg-gradient-to-b from-gray-50 to-white" id="common-repairs">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -414,7 +465,7 @@ export default function HowItWorksPage() {
       </section>
 
       {/* FAQ */}
-      <section className="w-full py-16 md:py-24 bg-gray-50">
+      <section className="w-full py-16 md:py-24 bg-gray-50" id="faq">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}

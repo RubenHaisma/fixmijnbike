@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow admin paths
+Disallow: /dashboard/admin/
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://fixmijnbike.nl/sitemap.xml

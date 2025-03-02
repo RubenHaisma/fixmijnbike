@@ -12,16 +12,35 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Image from "next/image";
 
 export function Header() {
   const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll effect for header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
+      scrolled 
+        ? 'bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm' 
+        : 'bg-background'
+    }`}>
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
@@ -31,6 +50,7 @@ export function Header() {
               width={40} 
               height={40} 
               className="rounded-full"
+              priority
             />
             <span className="text-xl font-bold text-primary">FixMijnBike</span>
           </Link>
@@ -49,29 +69,38 @@ export function Header() {
           </Link>
           
           {session ? (
-            <div className="flex items-center gap-4">
-              <Link href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
-          Dashboard
-              </Link>
-              <Button 
-          variant="outline" 
-          size="sm" 
-          onClick={() => signOut()} 
-          className="cursor-pointer"
-              >
-          Uitloggen
-              </Button>
-            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-2">
+                  <User className="h-4 w-4" />
+                  {session.user?.name?.split(' ')[0] || 'Account'}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Mijn Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard">Dashboard</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/profile">Profiel</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => signOut()}>
+                  Uitloggen
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           ) : (
             <div className="flex items-center gap-2">
               <Button asChild variant="ghost" size="sm">
-          <Link href="/login">
-            <LogIn className="mr-2 h-4 w-4" />
-            Inloggen
-          </Link>
+                <Link href="/login">
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Inloggen
+                </Link>
               </Button>
               <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
-          <Link href="/signup">Aanmelden</Link>
+                <Link href="/signup">Aanmelden</Link>
               </Button>
             </div>
           )}
@@ -80,7 +109,7 @@ export function Header() {
         {/* Mobile Navigation */}
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" aria-label="Menu">
               <Menu className="h-6 w-6" />
               <span className="sr-only">Toggle menu</span>
             </Button>

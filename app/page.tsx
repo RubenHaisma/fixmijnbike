@@ -4,11 +4,64 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Bike, Wrench, ArrowRight, Star, Euro, Clock, CheckCircle, Shield, Award, MapPin, ThumbsUp } from 'lucide-react';
 import Image from 'next/image';
-import { motion } from 'framer-motion'; // Ensure this line is present
+import { motion } from 'framer-motion';
+import { LocalBusinessSchema, ServiceSchema, FAQSchema } from '@/components/structured-data';
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center w-full bg-gray-50">
+      {/* Structured Data */}
+      <LocalBusinessSchema
+        name="FixMijnBike"
+        description="Persoonlijke fietsreparatie door studenten, voor studenten. Betaalbaar, snel en gemakkelijk."
+        url="https://fixmijnbike.nl"
+        email="info@fixmijnbike.nl"
+        telephone="+31612345678"
+        logo="https://fixmijnbike.nl/logo.png"
+        priceRange="€€"
+      />
+      
+      <ServiceSchema
+        name="Fietsreparatie voor Studenten"
+        description="Betaalbare fietsreparatie door studenten, voor studenten. Lekke band? Piepende remmen? Vind een student-fixer in jouw buurt die je snel en betaalbaar helpt."
+        provider={{
+          name: "FixMijnBike",
+          url: "https://fixmijnbike.nl"
+        }}
+        serviceArea={[
+          { name: "Amsterdam", type: "City" },
+          { name: "Utrecht", type: "City" },
+          { name: "Rotterdam", type: "City" },
+          { name: "Groningen", type: "City" },
+          { name: "Nederland", type: "Country" }
+        ]}
+        offers={[
+          { price: "4.00", priceCurrency: "EUR", description: "Platformkosten per reparatie" },
+          { price: "5.00-15.00", priceCurrency: "EUR", description: "Uurtarief voor reparaties" }
+        ]}
+      />
+      
+      <FAQSchema
+        questions={[
+          {
+            question: "Hoe snel kan mijn fiets gerepareerd worden?",
+            answer: "Meestal binnen 24-48 uur, afhankelijk van fixer-beschikbaarheid."
+          },
+          {
+            question: "Wat als de reparatie niet lukt?",
+            answer: "Je betaalt alleen de platformkosten als de reparatie niet lukt."
+          },
+          {
+            question: "Hoe worden reparatiekosten bepaald?",
+            answer: "Gebaseerd op het uurtarief van de fixer (€5-€15) en de tijd."
+          },
+          {
+            question: "Kan ik een specifieke fixer kiezen?",
+            answer: "Momenteel automatisch gematcht, keuze komt in de toekomst."
+          }
+        ]}
+      />
+
       {/* Hero Section */}
       <section className="w-full py-16 md:py-24 lg:py-32 bg-gradient-to-br from-orange-50 via-blue-50 to-white">
         <div className="container px-4 md:px-6">
@@ -19,7 +72,7 @@ export default function Home() {
             className="flex flex-col items-center space-y-6 max-w-4xl mx-auto text-center"
           >
             <Image 
-              src="/logo.png" 
+              src="/images/logo.png" 
               alt="FixMijnBike Logo" 
               width={140} 
               height={140} 
@@ -79,7 +132,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="w-full py-16 bg-white">
+      <section className="w-full py-16 bg-white" id="how-it-works">
         <div className="container px-4 md:px-6">
           <motion.div 
             initial={{ opacity: 0 }}
@@ -97,9 +150,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
             {[
-              { step: 1, icon: Bike, title: "Beschrijf je probleem", desc: "Vertel ons wat er mis is met je fiets en upload een foto", img: "/stap1.jpg", color: "orange" },
-              { step: 2, icon: Wrench, title: "Kies een Fixer", desc: "Bekijk student-fixers in jouw buurt en hun tarieven", img: "/tim.jpg", color: "blue" },
-              { step: 3, icon: Clock, title: "Boek een tijdslot", desc: "Betaal €4 platformkosten en plan je reparatie", img: "/stap3.jpg", color: "pink" },
+              { step: 1, icon: Bike, title: "Beschrijf je probleem", desc: "Vertel ons wat er mis is met je fiets en upload een foto", img: "/images/stap1.jpg", color: "orange" },
+              { step: 2, icon: Wrench, title: "Kies een Fixer", desc: "Bekijk student-fixers in jouw buurt en hun tarieven", img: "/images/tim.jpg", color: "blue" },
+              { step: 3, icon: Clock, title: "Boek een tijdslot", desc: "Betaal €4 platformkosten en plan je reparatie", img: "/images/stap3.jpg", color: "pink" },
             ].map((item, index) => (
               <motion.div 
                 key={index}
@@ -123,6 +176,15 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+          
+          <div className="text-center mt-8">
+            <Button asChild className="mt-4 bg-secondary hover:bg-secondary/90 transition-all duration-300">
+              <Link href="/how-it-works">
+                Meer informatie
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -137,7 +199,7 @@ export default function Home() {
               className="relative h-[500px] rounded-xl overflow-hidden shadow-xl"
             >
               <Image 
-                src="/bikefixing.jpg"
+                src="/images/bikefixing.jpg"
                 alt="Student repairing a Bike"
                 fill
                 style={{ objectFit: 'cover' }}
@@ -244,9 +306,9 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
             {[
-              { name: "Emma", uni: "UvA", quote: "Mijn ketting was kapot en Joost fixte het in 20 minuten voor €10!", img: "/emma.jpg", color: "orange" },
-              { name: "Tim", uni: "TU Delft", quote: "Ik verdien €100 per week extra als fixer, perfect naast mijn studie!", img: "/tim.jpg", color: "blue" },
-              { name: "Sophie", uni: "RUG", quote: "Lekke band op zondag? FixMijnBike regelde het dezelfde dag!", img: "/sophie.jpg", color: "pink" },
+              { name: "Emma", uni: "UvA", quote: "Mijn ketting was kapot en Joost fixte het in 20 minuten voor €10!", img: "/images/emma.jpg", color: "orange" },
+              { name: "Tim", uni: "TU Delft", quote: "Ik verdien €100 per week extra als fixer, perfect naast mijn studie!", img: "/images/tim.jpg", color: "blue" },
+              { name: "Sophie", uni: "RUG", quote: "Lekke band op zondag? FixMijnBike regelde het dezelfde dag!", img: "/images/sophie.jpg", color: "pink" },
             ].map((testimonial, index) => (
               <motion.div 
                 key={index}
@@ -297,10 +359,10 @@ export default function Home() {
           
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-5xl mx-auto">
             {[
-              { name: "Tim", uni: "TU Delft", specialty: "Versnellingen", img: "/tim.jpg", rating: 4.9, reviews: 42 },
-              { name: "Lisa", uni: "VU", specialty: "Remmen", img: "/lisa.jpg", rating: 4.8, reviews: 36 },
-              { name: "Martijn", uni: "Groningen", specialty: "Elektrische fietsen", img: "/martijn.jpg", rating: 4.9, reviews: 51 },
-              { name: "Maarten", uni: "UU", specialty: "Lekke banden", img: "/maarten.jpg", rating: 4.7, reviews: 29 },
+              { name: "Tim", uni: "TU Delft", specialty: "Versnellingen", img: "/images/tim.jpg", rating: 4.9, reviews: 42 },
+              { name: "Lisa", uni: "VU", specialty: "Remmen", img: "/images/lisa.jpg", rating: 4.8, reviews: 36 },
+              { name: "Martijn", uni: "Groningen", specialty: "Elektrische fietsen", img: "/images/martijn.jpg", rating: 4.9, reviews: 51 },
+              { name: "Maarten", uni: "UU", specialty: "Lekke banden", img: "/images/maarten.jpg", rating: 4.7, reviews: 29 },
             ].map((fixer, index) => (
               <motion.div 
                 key={index}
@@ -363,6 +425,47 @@ export default function Home() {
                 className="px-4 py-2 bg-gray-100 rounded-full text-sm font-medium text-gray-800 hover:bg-gray-200 transition-colors duration-300"
               >
                 {city}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="w-full py-16 bg-white" id="faq">
+        <div className="container px-4 md:px-6">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-secondary">
+              Veelgestelde Vragen
+            </h2>
+            <p className="mx-auto max-w-[700px] text-gray-700 md:text-lg mt-2">
+              Antwoorden op je vragen over FixMijnBike
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {[
+              { q: "Hoe snel kan mijn fiets gerepareerd worden?", a: "Meestal binnen 24-48 uur, afhankelijk van fixer-beschikbaarheid." },
+              { q: "Wat als de reparatie niet lukt?", a: "Je betaalt alleen de platformkosten als de reparatie niet lukt." },
+              { q: "Hoe worden reparatiekosten bepaald?", a: "Gebaseerd op het uurtarief van de fixer (€5-€15) en de tijd." },
+              { q: "Kan ik een specifieke fixer kiezen?", a: "Momenteel automatisch gematcht, keuze komt in de toekomst." },
+              { q: "Wat als ik mijn afspraak annuleer?", a: "Kosteloos tot 2 uur voor de afspraak, anders platformkosten." },
+              { q: "Zijn de fixers gekwalificeerd?", a: "Fixers geven hun vaardigheden aan en bouwen reputatie op via reviews." },
+            ].map((faq, index) => (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="border rounded-xl p-6 bg-white shadow-md hover:shadow-lg transition-shadow duration-300"
+              >
+                <h3 className="text-lg font-bold mb-2 text-gray-800">{faq.q}</h3>
+                <p className="text-gray-600">{faq.a}</p>
               </motion.div>
             ))}
           </div>
