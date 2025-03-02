@@ -27,17 +27,22 @@ const registerSchema = z.object({
 });
 
 export async function POST(request: Request) {
+  console.log("Registration request received");
   try {
     const body = await request.json();
+    console.log("Registration request body:", { ...body, password: "***REDACTED***" });
     
     // Validate input
+    console.log("Validating registration data");
     const result = registerSchema.safeParse(body);
     if (!result.success) {
+      console.error("Validation failed:", result.error.format());
       return NextResponse.json(
         { error: "Validatiefout", details: result.error.format() },
         { status: 400 }
       );
     }
+    console.log("Validation successful");
     
     const { 
       name, 
@@ -58,16 +63,19 @@ export async function POST(request: Request) {
     } = body;
     
     // Check if email is already registered
+    console.log(`Checking if email '${email}' is already registered`);
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
     
     if (existingUser) {
+      console.warn(`Registration failed: Email '${email}' is already in use`);
       return NextResponse.json(
         { error: "E-mailadres is al in gebruik" },
         { status: 400 }
       );
     }
+    console.log("Email check passed, email is available");
     
     // Check if email is from a Dutch university (for student verification)
     const isDutchStudentEmail = email.endsWith('.nl') && 
@@ -92,10 +100,15 @@ export async function POST(request: Request) {
        email.includes('inholland.nl') || 
        email.includes('han.nl'));
     
+    console.log(`Email is${isDutchStudentEmail ? '' : ' not'} recognized as Dutch student email`);
+    
     // Hash password
+    console.log("Hashing password");
     const hashedPassword = await bcrypt.hash(password, 12);
+    console.log("Password hashed successfully");
     
     // Create user
+    console.log("Creating user in database");
     const user = await prisma.user.create({
       data: {
         name,
@@ -112,9 +125,11 @@ export async function POST(request: Request) {
         isAvailable: role === "FIXER" ? true : false,
       },
     });
+    console.log(`User created successfully with ID: ${user.id}, role: ${role}`);
     
     // If user is a fixer, create fixer profile
     if (role === "FIXER" && (bio || experience || education || certifications || languages || profileImageUrl || specialties)) {
+      console.log(`Creating fixer profile for user ID: ${user.id}`);
       await prisma.fixerProfile.create({
         data: {
           userId: user.id,
@@ -129,15 +144,20 @@ export async function POST(request: Request) {
           preferredWorkArea: [],
         },
       });
+      console.log("Fixer profile created successfully");
     }
     
     // Generate verification token and send verification email
+    console.log(`Generating verification token for user ID: ${user.id}`);
     const verificationToken = await generateVerificationToken(user.id);
+    console.log(`Sending verification email to: ${email}`);
     await sendVerificationEmail(email, verificationToken);
+    console.log("Verification email sent successfully");
     
     // Remove password from response
     const { password: _, ...userWithoutPassword } = user;
     
+    console.log("Registration process completed successfully");
     return NextResponse.json(
       { 
         user: userWithoutPassword,
