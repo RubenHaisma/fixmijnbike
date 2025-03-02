@@ -138,7 +138,7 @@ export default function Home() {
             
             <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <Image 
-                src="https://images.unsplash.com/photo-1582559934361-5c0d5278b0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+                src="/bikefixing.jpg"
                 alt="Student repairing a Bike"
                 fill
                 style={{ objectFit: 'cover' }}
@@ -159,24 +159,52 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
               <div className="p-6 bg-orange-50 rounded-lg border border-orange-100 card-hover">
-                <p className="italic text-gray-700 mb-4">
-                  &quot;Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!&quot;
+              <div className="flex items-center gap-4 mb-4">
+                <p className="italic text-gray-700">
+                &quot;Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!&quot;
                 </p>
-                <p className="font-semibold">Emma, UvA student</p>
               </div>
+              <p className="font-semibold">Emma, UvA student</p>
+              <div className="h-48 w-48 relative rounded-full overflow-hidden mt-2 ml-4">
+                <Image 
+                  src="/emma.jpg" 
+                  alt="Emma, UvA student" 
+                  fill
+                  className="object-cover"
+                />
+                </div>
+              </div>
+              
               
               <div className="p-6 bg-blue-50 rounded-lg border border-blue-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Als Fixer verdien ik nu ongeveer €150 per week extra. Perfect naast mijn studie en ik help er andere studenten mee.&quot;
                 </p>
                 <p className="font-semibold">Tim, TU Delft student</p>
+                <div className="h-48 w-48 relative rounded-full overflow-hidden mt-2 ml-4">
+                <Image 
+                  src="/tim.jpg" 
+                  alt="Emma, UvA student" 
+                  fill
+                  className="object-cover"
+                />
+                </div>
               </div>
+              
               
               <div className="p-6 bg-red-50 rounded-lg border border-red-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Lekke band op zondag en alle winkels dicht. Dankzij BikeFixNL kon ik dezelfde dag nog naar college fietsen!&quot;
                 </p>
                 <p className="font-semibold">Sophie, RUG student</p>
+                <div className="h-48 w-48 relative rounded-full overflow-hidden mt-2 ml-4">
+                <Image 
+                  src="/sophie.jpg" 
+                  alt="Emma, UvA student" 
+                  fill
+                  className="object-cover"
+                />
+                </div>
               </div>
             </div>
           </div>
@@ -200,7 +228,7 @@ export default function Home() {
                   Repareer Mijn Fiets
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 button-hover">
+              <Button asChild size="lg" variant="outline" className="border-white text-black/80 hover:bg-white/10 button-hover">
                 <Link href="/become-fixer">
                   <Wrench className="mr-2 h-5 w-5" />
                   Word een Fixer
