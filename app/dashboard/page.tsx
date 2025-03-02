@@ -5,6 +5,9 @@ import { RiderDashboard } from "@/components/rider-dashboard";
 import { FixerDashboard } from "@/components/fixer-dashboard";
 import { AdminDashboard } from "@/components/admin-dashboard";
 
+// Force dynamic rendering to handle session fetching
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
   

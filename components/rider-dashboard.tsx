@@ -6,11 +6,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Bicycle, Clock, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
+import { Bike, Clock, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 
 type Repair = {
+  updatedAt: string;
   id: string;
   issueType: string;
   status: string;
@@ -141,7 +142,7 @@ export function RiderDashboard() {
           <CardContent className="pt-4">
             <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
               <Link href="/repair">
-                <Bicycle className="mr-2 h-4 w-4" />
+                <Bike className="mr-2 h-4 w-4" />
                 Reparatie aanvragen
               </Link>
             </Button>
@@ -178,7 +179,7 @@ export function RiderDashboard() {
               ).length === 0 ? (
                 <Card>
                   <CardContent className="pt-6 pb-6 flex flex-col items-center justify-center">
-                    <Bicycle className="h-12 w-12 text-muted-foreground mb-2" />
+                    <Bike className="h-12 w-12 text-muted-foreground mb-2" />
                     <p className="text-muted-foreground text-center">
                       Je hebt geen actieve reparaties. 
                       <br />

@@ -23,7 +23,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Bicycle, User, Mail, Lock, Phone, MapPin, AlertCircle } from "lucide-react";
+import { Bike, User, Mail, Lock, Phone, MapPin, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Link from "next/link";
 
@@ -107,7 +107,7 @@ export default function SignupPage() {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px]">
         <div className="flex flex-col space-y-2 text-center">
           <div className="flex justify-center">
-            <Bicycle className="h-10 w-10 text-orange-500" />
+            <Bike className="h-10 w-10 text-orange-500" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight">
             Maak een account aan

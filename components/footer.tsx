@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Bicycle, Mail, Phone, Instagram, Facebook, Twitter } from "lucide-react";
+import { Bike, Mail, Phone, Instagram, Facebook, Twitter } from "lucide-react";
 
 export function Footer() {
   return (
@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Bicycle className="h-6 w-6 text-orange-500" />
+              <Bike className="h-6 w-6 text-orange-500" />
               <span className="text-xl font-bold text-orange-500">BikeFixNL</span>
             </div>
             <p className="text-sm text-muted-foreground">

@@ -25,7 +25,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { CldUploadWidget } from "next-cloudinary";
-import { Bicycle, Upload, AlertCircle, Image as ImageIcon } from "lucide-react";
+import { Bike, Upload, AlertCircle, Image as ImageIcon } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -104,7 +104,7 @@ export default function RepairRequestPage() {
       <div className="flex flex-col space-y-6">
         <div className="flex flex-col space-y-2 text-center">
           <div className="flex justify-center">
-            <Bicycle className="h-10 w-10 text-orange-500" />
+            <Bike className="h-10 w-10 text-orange-500" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight">
             Vraag een fietsreparatie aan

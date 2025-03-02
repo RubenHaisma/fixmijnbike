@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Bicycle, Wrench, ArrowRight, Star, Euro, Clock } from 'lucide-react';
+import { Bike, Wrench, ArrowRight, Star, Euro, Clock } from 'lucide-react';
 import Image from 'next/image';
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
                 <Link href="/repair">
-                  <Bicycle className="mr-2 h-5 w-5" />
+                  <Bike className="mr-2 h-5 w-5" />
                   Repareer Mijn Fiets
                 </Link>
               </Button>
@@ -55,7 +55,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
               <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
                 <div className="p-3 rounded-full bg-orange-100">
-                  <Bicycle className="h-8 w-8 text-orange-500" />
+                  <Bike className="h-8 w-8 text-orange-500" />
                 </div>
                 <h3 className="text-xl font-bold">1. Beschrijf je probleem</h3>
                 <p className="text-gray-600 text-center">
@@ -112,7 +112,7 @@ export default function Home() {
                   <div>
                     <h3 className="font-bold">Flexibele tijden</h3>
                     <p className="text-gray-600">
-                      Reparaties wanneer het jou uitkomt, zelfs 's avonds en in het weekend
+                      Reparaties wanneer het jou uitkomt, zelfs &apos;s avonds en in het weekend
                     </p>
                   </div>
                 </div>
@@ -139,7 +139,7 @@ export default function Home() {
             <div className="relative h-[400px] rounded-lg overflow-hidden">
               <Image 
                 src="https://images.unsplash.com/photo-1582559934361-5c0d5278b0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="Student repairing a bicycle"
+                alt="Student repairing a Bike"
                 fill
                 style={{ objectFit: 'cover' }}
                 className="rounded-lg"
@@ -160,21 +160,21 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
               <div className="p-6 bg-orange-50 rounded-lg border border-orange-100">
                 <p className="italic text-gray-700 mb-4">
-                  "Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!"
+                  &quot;Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!&quot;
                 </p>
                 <p className="font-semibold">Emma, UvA student</p>
               </div>
               
               <div className="p-6 bg-blue-50 rounded-lg border border-blue-100">
                 <p className="italic text-gray-700 mb-4">
-                  "Als Fixer verdien ik nu ongeveer €150 per week extra. Perfect naast mijn studie en ik help er andere studenten mee."
+                  &quot;Als Fixer verdien ik nu ongeveer €150 per week extra. Perfect naast mijn studie en ik help er andere studenten mee.&quot;
                 </p>
                 <p className="font-semibold">Tim, TU Delft student</p>
               </div>
               
               <div className="p-6 bg-red-50 rounded-lg border border-red-100">
                 <p className="italic text-gray-700 mb-4">
-                  "Lekke band op zondag en alle winkels dicht. Dankzij BikeFixNL kon ik dezelfde dag nog naar college fietsen!"
+                  &quot;Lekke band op zondag en alle winkels dicht. Dankzij BikeFixNL kon ik dezelfde dag nog naar college fietsen!&quot;
                 </p>
                 <p className="font-semibold">Sophie, RUG student</p>
               </div>
@@ -196,7 +196,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-white text-orange-500 hover:bg-gray-100">
                 <Link href="/repair">
-                  <Bicycle className="mr-2 h-5 w-5" />
+                  <Bike className="mr-2 h-5 w-5" />
                   Repareer Mijn Fiets
                 </Link>
               </Button>

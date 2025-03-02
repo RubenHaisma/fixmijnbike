@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { CheckCircle, XCircle, AlertTriangle, DollarSign, Users, Bicycle, Wrench } from "lucide-react";
+import { CheckCircle, XCircle, AlertTriangle, DollarSign, Users, Bike, Wrench } from "lucide-react";
 import {
   Table,
   TableBody,
@@ -155,7 +155,7 @@ export function AdminDashboard() {
               <Skeleton className="h-8 w-20" />
             ) : (
               <div className="text-2xl font-bold flex items-center">
-                <Bicycle className="h-5 w-5 mr-2 text-orange-500" />
+                <Bike className="h-5 w-5 mr-2 text-orange-500" />
                 {stats?.totalRepairs || 0}
               </div>
             )}

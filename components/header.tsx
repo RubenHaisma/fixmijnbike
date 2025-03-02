@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Bicycle, Menu, User, LogIn } from "lucide-react";
+import { Bike, Menu, User, LogIn } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import {
   DropdownMenu,
@@ -24,7 +24,7 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <Bicycle className="h-6 w-6 text-orange-500" />
+            <Bike className="h-6 w-6 text-orange-500 ml-2" />
             <span className="text-xl font-bold text-orange-500">BikeFixNL</span>
           </Link>
         </div>
