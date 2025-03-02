@@ -96,7 +96,7 @@ function SignupFormContent() {
     setIsLoading(true);
     setError(null);
     setSuccess(null);
-
+  
     try {
       const response = await fetch("/api/register", {
         method: "POST",
@@ -105,20 +105,18 @@ function SignupFormContent() {
         },
         body: JSON.stringify(values),
       });
-
+  
       const data = await response.json();
-
+  
       if (!response.ok) {
-        setError(data.error || "Er is een fout opgetreden bij het registreren");
+        setError(data.error || "Er is een fout opgetreden bij het registreren. Probeer het later opnieuw.");
         return;
       }
-
+  
       setSuccess(data.message || "Account succesvol aangemaakt! Controleer je e-mail om je account te verifiëren.");
-      
-      // Don't sign in automatically - require email verification first
       router.push("/login?success=verification_sent");
     } catch (error) {
-      setError("Er is een fout opgetreden. Probeer het later opnieuw.");
+      setError("Er is een fout opgetreden. Controleer je verbinding en probeer het opnieuw.");
     } finally {
       setIsLoading(false);
     }
