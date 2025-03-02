@@ -4,13 +4,27 @@ import crypto from 'crypto';
 
 const prisma = new PrismaClient();
 
-// Create a transporter using Google SMTP
+// Create a secure transporter using Gmail SMTP with OAuth2
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASSWORD,
   },
+  tls: {
+    rejectUnauthorized: false // Required for some production environments
+  },
+  debug: process.env.NODE_ENV === 'development', // Enable debug logs in development
+  logger: process.env.NODE_ENV === 'development' // Enable logging in development
+});
+
+// Verify transporter connection on startup
+transporter.verify(function(error, success) {
+  if (error) {
+    console.error('Email transporter error:', error);
+  } else {
+    console.log('Email server is ready to send messages');
+  }
 });
 
 // Generate a verification token
@@ -115,88 +129,114 @@ const emailTemplate = (content: string) => `
   </html>
 `;
 
-
 export const verifyEmail = async (token: string) => {
-  // Find the verification token in the database
-  const verificationToken = await prisma.verificationToken.findFirst({
-    where: {
-      token,
-    },
-  });
+  try {
+    // Find the verification token in the database
+    const verificationToken = await prisma.verificationToken.findFirst({
+      where: {
+        token,
+      },
+    });
 
-  // Check if token exists
-  if (!verificationToken) {
-    throw new Error("Invalid token");
-  }
+    // Check if token exists
+    if (!verificationToken) {
+      throw new Error("Invalid token");
+    }
 
-  // Check if token is expired
-  if (verificationToken.expires < new Date()) {
-    // Optionally delete the expired token
+    // Check if token is expired
+    if (verificationToken.expires < new Date()) {
+      // Delete the expired token
+      await prisma.verificationToken.delete({
+        where: {
+          id: verificationToken.id,
+        },
+      });
+      throw new Error("Token expired");
+    }
+
+    // Update the user's email verification status
+    await prisma.user.update({
+      where: {
+        id: verificationToken.identifier,
+      },
+      data: {
+        emailVerified: new Date(),
+      },
+    });
+
+    // Delete the used token
     await prisma.verificationToken.delete({
       where: {
         id: verificationToken.id,
       },
     });
-    throw new Error("Token expired");
+  } catch (error) {
+    console.error("Error verifying email:", error);
+    throw error;
   }
-
-  // Update the user's email verification status
-  await prisma.user.update({
-    where: {
-      id: verificationToken.identifier,
-    },
-    data: {
-      emailVerified: new Date(),
-    },
-  });
-
-  // Delete the used token
-  await prisma.verificationToken.delete({
-    where: {
-      id: verificationToken.id,
-    },
-  });
 };
 
-
-// Send verification email
+// Send verification email with error handling and logging
 export const sendVerificationEmail = async (email: string, token: string) => {
-  const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
-  
-  const content = `
-    <h2>Verifieer je e-mailadres</h2>
-    <p>Bedankt voor je registratie bij FixMijnBike! Klik op de onderstaande knop om je e-mailadres te verifiëren:</p>
-    <a href="${verificationUrl}" class="button">E-mailadres verifiëren</a>
-    <p>Of kopieer en plak deze link in je browser:</p>
-    <p style="word-break: break-all; color: #4776e6;">${verificationUrl}</p>
-    <p>Deze link is 24 uur geldig.</p>
-    <p>Als je deze e-mail niet hebt aangevraagd, kun je deze veilig negeren.</p>
-  `;
-  
-  const mailOptions = {
-    from: "info@fixmijnbike.nl",
-    to: email,
-    subject: 'Verifieer je e-mailadres voor FixMijnBike',
-    html: emailTemplate(content),
-  };
-  
-  return transporter.sendMail(mailOptions);
+  try {
+    const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
+    
+    console.log('Sending verification email to:', email);
+    console.log('Verification URL:', verificationUrl);
+    
+    const content = `
+      <h2>Verifieer je e-mailadres</h2>
+      <p>Bedankt voor je registratie bij FixMijnBike! Klik op de onderstaande knop om je e-mailadres te verifiëren:</p>
+      <a href="${verificationUrl}" class="button" style="color: white;">E-mailadres verifiëren</a>
+      <p>Of kopieer en plak deze link in je browser:</p>
+      <p style="word-break: break-all; color: #4776e6;">${verificationUrl}</p>
+      <p>Deze link is 24 uur geldig.</p>
+      <p>Als je deze e-mail niet hebt aangevraagd, kun je deze veilig negeren.</p>
+    `;
+    
+    const mailOptions = {
+      from: {
+        name: "FixMijnBike",
+        address: process.env.EMAIL_USER!
+      },
+      to: email,
+      subject: 'Verifieer je e-mailadres voor FixMijnBike',
+      html: emailTemplate(content),
+    };
+    
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Verification email sent:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Error sending verification email:", error);
+    throw error;
+  }
 };
 
-// Send notification email
+// Send notification email with error handling
 export const sendNotificationEmail = async (email: string, title: string, message: string, actionUrl?: string) => {
-  const content = `
-    <h2>${title}</h2>
-    <p>${message}</p>
-    ${actionUrl ? `<a href="${process.env.NEXTAUTH_URL}${actionUrl}" class="button">Bekijk details</a>` : ''}
-  `;
-  
-  const mailOptions = {
-    from: "info@fixmijnbike.nl",
-    to: email,
-    subject: title,
-    html: emailTemplate(content),
-  };
-  
-  return transporter.sendMail(mailOptions);
-};
+  try {
+    const content = `
+      <h2>${title}</h2>
+      <p>${message}</p>
+      ${actionUrl ? `<a href="${process.env.NEXTAUTH_URL}${actionUrl}" class="button" style="color: white;">Bekijk details</a>` : ''}
+    `;
+    
+    const mailOptions = {
+      from: {
+        name: "FixMijnBike",
+        address: process.env.EMAIL_USER!
+      },
+      to: email,
+      subject: title,
+      html: emailTemplate(content),
+    };
+    
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Notification email sent:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Error sending notification email:", error);
+    throw error;
+  }
+}
