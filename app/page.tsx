@@ -190,10 +190,10 @@ export default function Home() {
               <div className="p-6 bg-orange-50 rounded-xl border border-orange-100 card-hover">
                 <div className="flex items-center mb-4">
                   <Image 
-                    src="/emma-avatar.jpg" 
+                    src="/emma.jpg" 
                     alt="Emma, UvA student" 
-                    width={60} 
-                    height={60} 
+                    width={100} 
+                    height={100} 
                     className="rounded-full border-2 border-primary"
                   />
                   <div className="ml-3">
@@ -204,22 +204,15 @@ export default function Home() {
                 <p className="personal-quote mb-4">
                   Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via FixMijnBike vond ik Joost die het binnen 20 minuten had opgelost voor maar €10! Super persoonlijke service!
                 </p>
-                <div className="flex text-yellow-500">
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                </div>
               </div>
               
               <div className="p-6 bg-blue-50 rounded-xl border border-blue-100 card-hover">
                 <div className="flex items-center mb-4">
                   <Image 
-                    src="/tim-avatar.jpg" 
+                    src="/tim.jpg" 
                     alt="Tim, TU Delft student" 
-                    width={60} 
-                    height={60} 
+                    width={100} 
+                    height={100} 
                     className="rounded-full border-2 border-secondary"
                   />
                   <div className="ml-3">
@@ -228,24 +221,17 @@ export default function Home() {
                   </div>
                 </div>
                 <p className="personal-quote mb-4">
-                  Als Fixer verdien ik nu ongeveer €150 per week extra. Perfect naast mijn studie en ik help er andere studenten mee. Het platform maakt het super makkelijk om in contact te komen!
+                  Als Fixer verdien ik nu ongeveer €100 per week extra. Perfect naast mijn studie en ik help er andere studenten mee. Het platform maakt het super makkelijk om in contact te komen!
                 </p>
-                <div className="flex text-yellow-500">
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                </div>
               </div>
               
               <div className="p-6 bg-pink-50 rounded-xl border border-pink-100 card-hover">
                 <div className="flex items-center mb-4">
                   <Image 
-                    src="/sophie-avatar.jpg" 
+                    src="/sophie.jpg" 
                     alt="Sophie, RUG student" 
-                    width={60} 
-                    height={60} 
+                    width={100} 
+                    height={100} 
                     className="rounded-full border-2 border-accent"
                   />
                   <div className="ml-3">
@@ -256,13 +242,6 @@ export default function Home() {
                 <p className="personal-quote mb-4">
                   Lekke band op zondag en alle winkels dicht. Dankzij FixMijnBike kon ik dezelfde dag nog naar college fietsen! Mijn fixer was super vriendelijk en legde alles goed uit.
                 </p>
-                <div className="flex text-yellow-500">
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                  <Star className="h-5 w-5 fill-current" />
-                </div>
               </div>
             </div>
           </div>
@@ -283,10 +262,10 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4 w-full">
               {[
                 {
-                  name: "Joost",
-                  university: "UvA",
+                  name: "Tim",
+                  university: "TU Delft",
                   specialty: "Versnellingen",
-                  image: "/fixer-joost.jpg",
+                  image: "/tim.jpg",
                   rating: 4.9,
                   reviews: 42
                 },
@@ -294,21 +273,21 @@ export default function Home() {
                   name: "Lisa",
                   university: "VU",
                   specialty: "Remmen",
-                  image: "/fixer-lisa.jpg",
+                  image: "/lisa.jpg",
                   rating: 4.8,
                   reviews: 36
                 },
                 {
                   name: "Martijn",
-                  university: "TU Delft",
+                  university: "Groningen",
                   specialty: "Elektrische fietsen",
                   image: "/fixer-martijn.jpg",
                   rating: 4.9,
                   reviews: 51
                 },
                 {
-                  name: "Anouk",
-                  university: "RUG",
+                  name: "Maarten",
+                  university: "UU",
                   specialty: "Lekke banden",
                   image: "/fixer-anouk.jpg",
                   rating: 4.7,

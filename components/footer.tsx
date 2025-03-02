@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <Image 
-                src="/logo-fixmijnbike.png" 
+                src="/logo.png" 
                 alt="FixMijnBike Logo" 
                 width={40} 
                 height={40} 
