@@ -25,12 +25,12 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
     
-    /* Dutch-themed colors */
-    --primary: 16 100% 50%; /* Orange */
+    /* Warm, personal colors */
+    --primary: 25 100% 50%; /* Warm Orange */
     --primary-foreground: 0 0% 98%;
-    --secondary: 220 100% 50%; /* Blue */
+    --secondary: 200 70% 50%; /* Friendly Blue */
     --secondary-foreground: 0 0% 98%;
-    --accent: 0 100% 50%; /* Red */
+    --accent: 340 80% 55%; /* Vibrant Pink */
     --accent-foreground: 0 0% 98%;
     
     --muted: 0 0% 96.1%;
@@ -39,13 +39,13 @@
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 16 100% 50%;
-    --chart-1: 16 100% 50%; /* Orange */
-    --chart-2: 220 100% 50%; /* Blue */
-    --chart-3: 0 100% 50%; /* Red */
+    --ring: 25 100% 50%;
+    --chart-1: 25 100% 50%; /* Warm Orange */
+    --chart-2: 200 70% 50%; /* Friendly Blue */
+    --chart-3: 340 80% 55%; /* Vibrant Pink */
     --chart-4: 0 0% 100%; /* White */
     --chart-5: 0 0% 0%; /* Black */
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -55,12 +55,12 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
     
-    /* Dutch-themed colors (darker variants) */
-    --primary: 16 80% 45%; /* Orange */
+    /* Warm, personal colors (darker variants) */
+    --primary: 25 80% 45%; /* Warm Orange */
     --primary-foreground: 0 0% 98%;
-    --secondary: 220 80% 45%; /* Blue */
+    --secondary: 200 60% 45%; /* Friendly Blue */
     --secondary-foreground: 0 0% 98%;
-    --accent: 0 80% 45%; /* Red */
+    --accent: 340 70% 50%; /* Vibrant Pink */
     --accent-foreground: 0 0% 98%;
     
     --muted: 0 0% 14.9%;
@@ -69,10 +69,10 @@
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 16 80% 45%;
-    --chart-1: 16 80% 45%; /* Orange */
-    --chart-2: 220 80% 45%; /* Blue */
-    --chart-3: 0 80% 45%; /* Red */
+    --ring: 25 80% 45%;
+    --chart-1: 25 80% 45%; /* Warm Orange */
+    --chart-2: 200 60% 45%; /* Friendly Blue */
+    --chart-3: 340 70% 50%; /* Vibrant Pink */
     --chart-4: 0 0% 80%; /* Light gray */
     --chart-5: 0 0% 20%; /* Dark gray */
   }
@@ -84,17 +84,19 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: url('/subtle-pattern.png');
+    background-repeat: repeat;
   }
 }
 
-.dutch-gradient {
-  background: linear-gradient(135deg, hsl(0, 100%, 50%) 0%, hsl(0, 0%, 100%) 33%, hsl(220, 100%, 50%) 66%, hsl(16, 100%, 50%) 100%);
+.personal-gradient {
+  background: linear-gradient(135deg, hsl(340, 80%, 55%) 0%, hsl(0, 0%, 100%) 33%, hsl(200, 70%, 50%) 66%, hsl(25, 100%, 50%) 100%);
 }
 
-.dutch-border {
+.personal-border {
   border-width: 3px;
   border-style: solid;
-  border-image: linear-gradient(to right, hsl(0, 100%, 50%), hsl(220, 100%, 50%), hsl(16, 100%, 50%)) 1;
+  border-image: linear-gradient(to right, hsl(340, 80%, 55%), hsl(200, 70%, 50%), hsl(25, 100%, 50%)) 1;
 }
 
 /* Improved container classes */
@@ -125,21 +127,32 @@
 /* Hero section styling */
 .hero-section {
   @apply w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-orange-50 to-white text-center;
+  background-image: url('/hero-pattern.png'), linear-gradient(to bottom, #fff5eb, #ffffff);
+  background-size: cover;
+  background-position: center;
 }
 
 /* Feature section styling */
 .feature-section {
   @apply w-full py-12 md:py-24 bg-white text-center;
+  background-image: url('/feature-pattern.png');
+  background-size: cover;
 }
 
 /* Testimonial section styling */
 .testimonial-section {
   @apply w-full py-12 md:py-24 bg-blue-50 text-center;
+  background-image: url('/testimonial-pattern.png'), linear-gradient(to bottom, #ebf5ff, #f0f7ff);
+  background-size: cover;
+  background-position: center;
 }
 
 /* CTA section styling */
 .cta-section {
-  @apply w-full py-12 md:py-24 bg-gradient-to-r from-orange-500 via-red-500 to-blue-600 text-white text-center;
+  @apply w-full py-12 md:py-24 text-white text-center;
+  background-image: url('/cta-pattern.png'), linear-gradient(to right, #ff8a00, #ff5e62, #4776e6);
+  background-size: cover;
+  background-position: center;
 }
 
 /* Loading spinner */
@@ -154,7 +167,7 @@
 
 /* Responsive image container */
 .img-container {
-  @apply relative overflow-hidden rounded-lg;
+  @apply relative overflow-hidden rounded-lg shadow-md;
 }
 
 /* Accessibility improvements */
@@ -165,4 +178,21 @@
 /* Focus styles for better accessibility */
 .focus-ring {
   @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
+}
+
+/* Personal touch elements */
+.personal-card {
+  @apply rounded-xl border border-orange-200 bg-white shadow-sm hover:shadow-md transition-all duration-300;
+}
+
+.personal-avatar {
+  @apply rounded-full border-2 border-primary shadow-md;
+}
+
+.personal-quote {
+  @apply italic text-gray-700 relative pl-4 before:content-['"'] before:absolute before:left-0 before:top-0 before:text-2xl before:text-primary before:font-serif;
+}
+
+.handwritten {
+  font-family: 'Caveat', cursive;
 }

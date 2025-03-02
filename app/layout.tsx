@@ -10,17 +10,17 @@ import { Footer } from '@/components/footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'BikeFixNL - Fietsreparatie door studenten, voor studenten',
+  title: 'FixMijnBike - Persoonlijke fietsreparatie door studenten, voor studenten',
   description: 'Verbind studenten met fietsreparatie behoeften aan student "fixers" die extra geld verdienen',
   keywords: 'fietsreparatie, studenten, bijverdienen, fietsenmaker, fiets repareren, goedkope fietsreparatie',
-  authors: [{ name: 'BikeFixNL Team' }],
+  authors: [{ name: 'FixMijnBike Team' }],
   openGraph: {
     type: 'website',
     locale: 'nl_NL',
-    url: 'https://bikefixnl.nl',
-    title: 'BikeFixNL - Fietsreparatie door studenten, voor studenten',
+    url: 'https://fixmijnbike.nl',
+    title: 'FixMijnBike - Persoonlijke fietsreparatie door studenten, voor studenten',
     description: 'Verbind studenten met fietsreparatie behoeften aan student "fixers" die extra geld verdienen',
-    siteName: 'BikeFixNL',
+    siteName: 'FixMijnBike',
   },
   icons: {
     icon: '/favicon.ico',

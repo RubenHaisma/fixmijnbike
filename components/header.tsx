@@ -25,20 +25,26 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <Bike className="h-6 w-6 text-orange-500" />
-            <span className="text-xl font-bold text-orange-500">BikeFixNL</span>
+            <Image 
+              src="/logo-fixmijnbike.png" 
+              alt="FixMijnBike Logo" 
+              width={40} 
+              height={40} 
+              className="rounded-full"
+            />
+            <span className="text-xl font-bold text-primary">FixMijnBike</span>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/repair" className="text-sm font-medium hover:text-orange-500 transition-colors">
+          <Link href="/repair" className="text-sm font-medium hover:text-primary transition-colors">
             Reparatie Aanvragen
           </Link>
-          <Link href="/become-fixer" className="text-sm font-medium hover:text-orange-500 transition-colors">
+          <Link href="/become-fixer" className="text-sm font-medium hover:text-primary transition-colors">
             Word een Fixer
           </Link>
-          <Link href="/how-it-works" className="text-sm font-medium hover:text-orange-500 transition-colors">
+          <Link href="/how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
             Hoe het werkt
           </Link>
           
@@ -46,7 +52,16 @@ export function Header() {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  <User className="h-5 w-5" />
+                  {session.user?.image ? (
+                    <Image 
+                      src={session.user.image} 
+                      alt={session.user.name || "Profielfoto"} 
+                      fill 
+                      className="rounded-full object-cover"
+                    />
+                  ) : (
+                    <User className="h-5 w-5" />
+                  )}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
@@ -72,7 +87,7 @@ export function Header() {
                   Inloggen
                 </Link>
               </Button>
-              <Button asChild size="sm" className="bg-orange-500 hover:bg-orange-600">
+              <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
                 <Link href="/signup">Aanmelden</Link>
               </Button>
             </div>
@@ -91,21 +106,21 @@ export function Header() {
             <div className="flex flex-col gap-6 mt-8">
               <Link 
                 href="/repair" 
-                className="text-lg font-medium hover:text-orange-500 transition-colors"
+                className="text-lg font-medium hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Reparatie Aanvragen
               </Link>
               <Link 
                 href="/become-fixer" 
-                className="text-lg font-medium hover:text-orange-500 transition-colors"
+                className="text-lg font-medium hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Word een Fixer
               </Link>
               <Link 
                 href="/how-it-works" 
-                className="text-lg font-medium hover:text-orange-500 transition-colors"
+                className="text-lg font-medium hover:text-primary transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Hoe het werkt
@@ -115,14 +130,14 @@ export function Header() {
                 <>
                   <Link 
                     href="/dashboard" 
-                    className="text-lg font-medium hover:text-orange-500 transition-colors"
+                    className="text-lg font-medium hover:text-primary transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Dashboard
                   </Link>
                   <Link 
                     href="/profile" 
-                    className="text-lg font-medium hover:text-orange-500 transition-colors"
+                    className="text-lg font-medium hover:text-primary transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Profiel
@@ -150,7 +165,7 @@ export function Header() {
                   </Button>
                   <Button 
                     asChild 
-                    className="w-full bg-orange-500 hover:bg-orange-600"
+                    className="w-full bg-primary hover:bg-primary/90"
                   >
                     <Link 
                       href="/signup"
