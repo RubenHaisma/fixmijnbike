@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -28,11 +29,11 @@ const formSchema = z.object({
   path: ["confirmPassword"],
 });
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [isValidating, setIsValidating] = useState(true);
   const [isTokenValid, setIsTokenValid] = useState(false);
@@ -53,13 +54,13 @@ export default function ResetPasswordPage() {
       setError("Geen reset token gevonden");
       return;
     }
-    
+
     const validateToken = async () => {
       try {
         const response = await fetch(`/api/validate-reset-token?token=${token}`, {
           method: "GET",
         });
-        
+
         if (response.ok) {
           setIsTokenValid(true);
         } else {
@@ -72,7 +73,7 @@ export default function ResetPasswordPage() {
         setIsValidating(false);
       }
     };
-    
+
     validateToken();
   }, [token]);
 
@@ -100,8 +101,7 @@ export default function ResetPasswordPage() {
       }
 
       setSuccess(true);
-      
-      // Redirect to login after 3 seconds
+
       setTimeout(() => {
         router.push("/login?success=password_reset");
       }, 3000);
@@ -118,11 +118,11 @@ export default function ResetPasswordPage() {
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Wachtwoord resetten</CardTitle>
           <CardDescription>
-            {isValidating 
-              ? "Token wordt gevalideerd..." 
-              : isTokenValid 
-                ? "Voer je nieuwe wachtwoord in" 
-                : "Ongeldig of verlopen token"}
+            {isValidating
+              ? "Token wordt gevalideerd..."
+              : isTokenValid
+              ? "Voer je nieuwe wachtwoord in"
+              : "Ongeldig of verlopen token"}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -199,14 +199,19 @@ export default function ResetPasswordPage() {
           ) : null}
         </CardContent>
         <CardFooter className="flex justify-center">
-          <Link
-            href="/login"
-            className="text-sm text-blue-600 hover:underline"
-          >
+          <Link href="/login" className="text-sm text-blue-600 hover:underline">
             Terug naar inloggen
           </Link>
         </CardFooter>
       </Card>
     </div>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 }

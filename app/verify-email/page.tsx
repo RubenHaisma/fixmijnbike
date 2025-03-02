@@ -6,29 +6,30 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, XCircle, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  
+
   const [isVerifying, setIsVerifying] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  
+
   useEffect(() => {
     if (!token) {
       setIsVerifying(false);
       setError("Geen verificatietoken gevonden");
       return;
     }
-    
+
     const verifyToken = async () => {
       try {
         const response = await fetch(`/api/verify-email?token=${token}`, {
           method: "GET",
         });
-        
+
         if (response.ok) {
           setIsSuccess(true);
         } else {
@@ -41,10 +42,10 @@ export default function VerifyEmailPage() {
         setIsVerifying(false);
       }
     };
-    
+
     verifyToken();
   }, [token]);
-  
+
   return (
     <div className="container flex items-center justify-center min-h-[calc(100vh-4rem)] py-12">
       <Card className="w-full max-w-md">
@@ -85,5 +86,13 @@ export default function VerifyEmailPage() {
         </CardFooter>
       </Card>
     </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
