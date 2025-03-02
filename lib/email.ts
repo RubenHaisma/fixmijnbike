@@ -108,11 +108,6 @@ const emailTemplate = (content: string) => `
           ${content}
         </div>
         <div class="footer">
-          <div class="social-links">
-            <a href="https://instagram.com/fixmijnbike">Instagram</a>
-            <a href="https://facebook.com/fixmijnbike">Facebook</a>
-            <a href="https://twitter.com/fixmijnbike">Twitter</a>
-          </div>
           <p>&copy; ${new Date().getFullYear()} FixMijnBike. Alle rechten voorbehouden.</p>
         </div>
       </div>
