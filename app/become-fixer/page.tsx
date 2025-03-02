@@ -264,5 +264,8 @@ export default function BecomeFixerPage() {
               Veelgestelde vragen
             </h2>
           </div>
-  )
+        </div>
+      </section>
+    </div>
+  );
 }
