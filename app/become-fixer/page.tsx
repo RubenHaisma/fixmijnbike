@@ -220,7 +220,7 @@ export default function BecomeFixerPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12 max-w-5xl mx-auto">
             {[
               { name: "Tim", uni: "TU Delft", quote: "Als student heb ik altijd al een passie gehad voor fietsen. Nu verdien ik €150-€200 per week extra!", img: "/images/tim.jpg", color: "blue" },
-              { name: "Lisa", uni: "UvA", quote: "Ik repareer al jaren fietsen als hobby. FixMijnBike heeft me geholpen om dit om te zetten in een leuke bijbaan.", img: "/images/lisa.jpg", color: "orange" },
+              { name: "Lisa", uni: "UvA", quote: "Ik repareer al jaren fietsen als hobby. FixMijnBike heeft me geholpen om dit om te zetten in een leuke bijbaan.", img: "/images/Lisa.jpg", color: "orange" },
               { name: "Martijn", uni: "RUG", quote: "Het platform is super gebruiksvriendelijk. Ik kan mijn beschikbaarheid aanpassen wanneer ik wil.", img: "/images/martijn.jpg", color: "pink" },
             ].map((testimonial, index) => (
               <motion.div

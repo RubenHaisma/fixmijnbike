@@ -360,7 +360,7 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-5xl mx-auto">
             {[
               { name: "Tim", uni: "TU Delft", specialty: "Versnellingen", img: "/images/tim.jpg", rating: 4.9, reviews: 42 },
-              { name: "Lisa", uni: "VU", specialty: "Remmen", img: "/images/lisa.jpg", rating: 4.8, reviews: 36 },
+              { name: "Lisa", uni: "VU", specialty: "Remmen", img: "/images/Lisa.jpg", rating: 4.8, reviews: 36 },
               { name: "Martijn", uni: "Groningen", specialty: "Elektrische fietsen", img: "/images/martijn.jpg", rating: 4.9, reviews: 51 },
               { name: "Maarten", uni: "UU", specialty: "Lekke banden", img: "/images/maarten.jpg", rating: 4.7, reviews: 29 },
             ].map((fixer, index) => (
