@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Bicycle, Wrench } from "lucide-react";
+import { Bike, Wrench } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function RoleSelectionPage() {
@@ -66,7 +66,7 @@ export default function RoleSelectionPage() {
           <Card className="border-2 hover:border-orange-500 cursor-pointer transition-all" onClick={() => selectRole("RIDER")}>
             <CardHeader className="text-center">
               <div className="mx-auto bg-orange-100 p-3 rounded-full w-fit">
-                <Bicycle className="h-8 w-8 text-orange-500" />
+                <Bike className="h-8 w-8 text-orange-500" />
               </div>
               <CardTitle className="text-xl">Ik wil mijn fiets laten repareren</CardTitle>
               <CardDescription>

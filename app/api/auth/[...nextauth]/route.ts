@@ -1,19 +1,22 @@
+// app/api/auth/[...nextauth]/route.ts
 import NextAuth from "next-auth";
+import { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcryptjs";
+import { NextRequest } from "next/server";
 
 const prisma = new PrismaClient();
 
-export const authOptions = {
+// Define auth configuration
+const authConfig: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      // Only allow Dutch university emails
       allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
@@ -88,6 +91,9 @@ export const authOptions = {
   },
 };
 
-const handler = NextAuth(authOptions);
+// Create handler directly without exporting config
+const handler = NextAuth(authConfig);
 
-export { handler as GET, handler as POST };
+// Export HTTP method handlers
+export const GET = (req: NextRequest, context: any) => handler(req, context);
+export const POST = (req: NextRequest, context: any) => handler(req, context);
