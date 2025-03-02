@@ -100,3 +100,32 @@ export const verifyEmail = async (token: string) => {
   
   return true;
 };
+
+// Send notification email
+export const sendNotificationEmail = async (email: string, title: string, message: string, actionUrl?: string) => {
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: title,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background-color: #ff8a00; padding: 20px; text-align: center; color: white;">
+          <h1>FixMijnBike</h1>
+        </div>
+        <div style="padding: 20px; border: 1px solid #ddd; border-top: none;">
+          <h2>${title}</h2>
+          <p>${message}</p>
+          ${actionUrl ? `
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${actionUrl}" style="background-color: #ff8a00; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">Bekijk details</a>
+          </div>
+          ` : ''}
+          <hr style="margin: 30px 0; border: none; border-top: 1px solid #ddd;" />
+          <p style="color: #777; font-size: 12px; text-align: center;">© ${new Date().getFullYear()} FixMijnBike. Alle rechten voorbehouden.</p>
+        </div>
+      </div>
+    `,
+  };
+  
+  return transporter.sendMail(mailOptions);
+};

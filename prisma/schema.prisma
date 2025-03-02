@@ -52,6 +52,18 @@ model User {
   referredBy    String?
   referrals     Referral[] @relation("Referrer")
   referredUsers Referral[] @relation("Referred")
+
+  // Profile relations
+  fixerProfile  FixerProfile?
+  
+  // Notification relations
+  notifications Notification[] @relation("UserNotifications")
+  sentNotifications Notification[] @relation("SenderNotifications")
+  
+  // Notification preferences
+  emailNotifications Boolean @default(true)
+  pushNotifications Boolean @default(true)
+  inAppNotifications Boolean @default(true)
 }
 
 model Account {
@@ -100,6 +112,8 @@ model PasswordResetToken {
 enum RepairStatus {
   PENDING
   MATCHED
+  ACCEPTED
+  DECLINED
   BOOKED
   COMPLETED
   CANCELLED
@@ -123,6 +137,12 @@ model Repair {
   repairCost  Float?
   paymentId   String?
   isPaid      Boolean     @default(false)
+  
+  // Assignment info
+  assignedAt  DateTime?
+  acceptedAt  DateTime?
+  declinedAt  DateTime?
+  declineReason String?
   
   // Relations
   rider       User        @relation("RiderRepairs", fields: [riderId], references: [id])
@@ -165,4 +185,69 @@ model Referral {
   // Relations
   referrer      User     @relation("Referrer", fields: [referrerId], references: [id])
   referred      User     @relation("Referred", fields: [referredId], references: [id])
+}
+
+// New models for enhanced functionality
+
+enum NotificationType {
+  REPAIR_REQUEST
+  REPAIR_MATCHED
+  REPAIR_ACCEPTED
+  REPAIR_DECLINED
+  REPAIR_BOOKED
+  REPAIR_COMPLETED
+  REPAIR_CANCELLED
+  PAYMENT_RECEIVED
+  PAYOUT_PROCESSED
+  SYSTEM_MESSAGE
+}
+
+model Notification {
+  id            String           @id @default(cuid())
+  userId        String
+  senderId      String?
+  type          NotificationType
+  title         String
+  message       String
+  isRead        Boolean          @default(false)
+  createdAt     DateTime         @default(now())
+  readAt        DateTime?
+  linkUrl       String?
+  
+  // Relations
+  user          User             @relation("UserNotifications", fields: [userId], references: [id], onDelete: Cascade)
+  sender        User?            @relation("SenderNotifications", fields: [senderId], references: [id], onDelete: SetNull)
+}
+
+model FixerProfile {
+  id                String   @id @default(cuid())
+  userId            String   @unique
+  bio               String?  @db.Text
+  experience        String?  @db.Text
+  education         String?  @db.Text
+  certifications    String[]
+  languages         String[]
+  profileImageUrl   String?
+  galleryImages     String[]
+  averageRating     Float?
+  totalReviews      Int      @default(0)
+  specialties       String[]
+  toolsOwned        String[]
+  preferredWorkArea String[]
+  
+  // Relations
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reviews           Review[]
+}
+
+model Review {
+  id            String   @id @default(cuid())
+  profileId     String
+  riderId       String
+  rating        Int
+  comment       String?  @db.Text
+  createdAt     DateTime @default(now())
+  
+  // Relations
+  fixerProfile  FixerProfile @relation(fields: [profileId], references: [id], onDelete: Cascade)
 }

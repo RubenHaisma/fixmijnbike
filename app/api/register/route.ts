@@ -14,6 +14,16 @@ const registerSchema = z.object({
   role: z.enum(["RIDER", "FIXER"]),
   postalCode: z.string().regex(/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i, "Ongeldige postcode"),
   phoneNumber: z.string().regex(/^(\+31|0)6[0-9]{8}$/, "Ongeldig telefoonnummer"),
+  // Optional fields for fixer profile
+  bio: z.string().optional(),
+  experience: z.string().optional(),
+  education: z.string().optional(),
+  certifications: z.array(z.string()).optional(),
+  languages: z.array(z.string()).optional(),
+  profileImageUrl: z.string().optional(),
+  specialties: z.array(z.string()).optional(),
+  skills: z.array(z.string()).optional(),
+  hourlyRate: z.number().optional(),
 });
 
 export async function POST(request: Request) {
@@ -29,7 +39,23 @@ export async function POST(request: Request) {
       );
     }
     
-    const { name, email, password, role, postalCode, phoneNumber } = body;
+    const { 
+      name, 
+      email, 
+      password, 
+      role, 
+      postalCode, 
+      phoneNumber,
+      bio,
+      experience,
+      education,
+      certifications,
+      languages,
+      profileImageUrl,
+      specialties,
+      skills,
+      hourlyRate
+    } = body;
     
     // Check if email is already registered
     const existingUser = await prisma.user.findUnique({
@@ -80,8 +106,30 @@ export async function POST(request: Request) {
         phoneNumber,
         // If it's a Dutch student email, they get a free first booking
         walletBalance: isDutchStudentEmail ? 4 : 0,
+        // If user is a fixer, set skills and hourly rate
+        skills: role === "FIXER" ? (skills || []) : [],
+        hourlyRate: role === "FIXER" ? (hourlyRate || 10) : null,
+        isAvailable: role === "FIXER" ? true : false,
       },
     });
+    
+    // If user is a fixer, create fixer profile
+    if (role === "FIXER" && (bio || experience || education || certifications || languages || profileImageUrl || specialties)) {
+      await prisma.fixerProfile.create({
+        data: {
+          userId: user.id,
+          bio: bio || "",
+          experience: experience || "",
+          education: education || "",
+          certifications: certifications || [],
+          languages: languages || [],
+          profileImageUrl: profileImageUrl,
+          specialties: specialties || [],
+          toolsOwned: [],
+          preferredWorkArea: [],
+        },
+      });
+    }
     
     // Generate verification token and send verification email
     const verificationToken = await generateVerificationToken(user.id);

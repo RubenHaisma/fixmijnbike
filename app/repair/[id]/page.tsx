@@ -49,6 +49,7 @@ export default async function RepairDetailsPage({ params: paramsPromise }: Props
           phoneNumber: true,
           postalCode: true,
           hourlyRate: true,
+          fixerProfile: true,
         },
       },
     },

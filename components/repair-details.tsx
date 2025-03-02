@@ -10,6 +10,9 @@ import { CheckCircle, XCircle, AlertTriangle, Phone, MapPin, Euro, Clock } from 
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { FixerProfileCard } from "@/components/FixerProfileCard";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -26,6 +29,9 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showFixerProfile, setShowFixerProfile] = useState(false);
+  const [showDeclineDialog, setShowDeclineDialog] = useState(false);
+  const [declineReason, setDeclineReason] = useState("");
   
   const isRider = userId === repair.riderId;
   const isFixer = userId === repair.fixerId;
@@ -121,12 +127,67 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
     }
   }
   
+  async function acceptRepair() {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch(`/api/repairs/${repair.id}/accept`, {
+        method: "PUT",
+      });
+      
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Er is een fout opgetreden");
+      }
+      
+      router.refresh();
+    } catch (error: any) {
+      console.error("Error accepting repair:", error);
+      setError(error.message || "Er is een fout opgetreden bij het accepteren van de reparatie");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  
+  async function declineRepair() {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch(`/api/repairs/${repair.id}/decline`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reason: declineReason }),
+      });
+      
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Er is een fout opgetreden");
+      }
+      
+      setShowDeclineDialog(false);
+      router.refresh();
+    } catch (error: any) {
+      console.error("Error declining repair:", error);
+      setError(error.message || "Er is een fout opgetreden bij het weigeren van de reparatie");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+  
   function getStatusBadge(status: string) {
     switch (status) {
       case "PENDING":
         return <Badge variant="outline" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">Wachtend</Badge>;
       case "MATCHED":
         return <Badge variant="outline" className="bg-blue-100 text-blue-800 hover:bg-blue-100">Gematcht</Badge>;
+      case "ACCEPTED":
+        return <Badge variant="outline" className="bg-green-100 text-green-800 hover:bg-green-100">Geaccepteerd</Badge>;
+      case "DECLINED":
+        return <Badge variant="outline" className="bg-red-100 text-red-800 hover:bg-red-100">Geweigerd</Badge>;
       case "BOOKED":
         return <Badge variant="outline" className="bg-green-100 text-green-800 hover:bg-green-100">Geboekt</Badge>;
       case "COMPLETED":
@@ -224,6 +285,13 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
                   </p>
                 </div>
               )}
+              
+              {repair.declineReason && (
+                <div className="col-span-2">
+                  <h3 className="font-medium">Reden voor weigering</h3>
+                  <p className="text-red-600">{repair.declineReason}</p>
+                </div>
+              )}
             </div>
             
             {repair.imageUrl && (
@@ -274,7 +342,18 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
             {repair.fixer && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Fixer informatie</CardTitle>
+                  <div className="flex justify-between items-center">
+                    <CardTitle>Fixer informatie</CardTitle>
+                    {repair.fixer.fixerProfile && (
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        onClick={() => setShowFixerProfile(true)}
+                      >
+                        Bekijk profiel
+                      </Button>
+                    )}
+                  </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -336,7 +415,7 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
                     <div>
                       <h3 className="font-medium">Locatie</h3>
                       <p className="flex items-center">
-                        <MapPin className="h-4 w-4 mr-1 text -muted-foreground" />
+                        <MapPin className="h-4 w-4 mr-1 text-muted-foreground" />
                         {repair.rider.postalCode}
                       </p>
                     </div>
@@ -377,6 +456,76 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
             </Button>
           )}
           
+          {isRider && repair.status === "ACCEPTED" && (
+            <Button 
+              onClick={handlePayment} 
+              disabled={isLoading}
+              className="flex-1 bg-orange-500 hover:bg-orange-600"
+            >
+              {isLoading ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Bezig...
+                </span>
+              ) : (
+                <>
+                  <Euro className="mr-2 h-4 w-4" />
+                  Nu boeken (€4)
+                </>
+              )}
+            </Button>
+          )}
+          
+          {isFixer && repair.status === "MATCHED" && (
+            <>
+              <Button 
+                onClick={acceptRepair} 
+                disabled={isLoading}
+                className="flex-1 bg-green-600 hover:bg-green-700"
+              >
+                {isLoading ? (
+                  <span className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Bezig...
+                  </span>
+                ) : (
+                  <>
+                    <CheckCircle className="mr-2 h-4 w-4" />
+                    Accepteren
+                  </>
+                )}
+              </Button>
+              
+              <Button 
+                onClick={() => setShowDeclineDialog(true)} 
+                disabled={isLoading}
+                variant="destructive"
+                className="flex-1"
+              >
+                {isLoading ? (
+                  <span className="flex items-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Bezig...
+                  </span>
+                ) : (
+                  <>
+                    <XCircle className="mr-2 h-4 w-4" />
+                    Weigeren
+                  </>
+                )}
+              </Button>
+            </>
+          )}
+          
           {isFixer && repair.status === "BOOKED" && (
             <Button 
               onClick={markAsCompleted} 
@@ -400,7 +549,7 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
             </Button>
           )}
           
-          {(isRider || isFixer) && ["PENDING", "MATCHED", "BOOKED"].includes(repair.status) && (
+          {(isRider || isFixer) && ["PENDING", "MATCHED", "ACCEPTED", "BOOKED"].includes(repair.status) && (
             <Button 
               onClick={cancelRepair} 
               disabled={isLoading}
