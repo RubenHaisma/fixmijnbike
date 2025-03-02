@@ -15,6 +15,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
@@ -24,9 +25,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Bike, User, Mail, Lock, Phone, MapPin, AlertCircle, CheckCircle } from "lucide-react";
+import { Bike, User, Mail, Lock, Phone, MapPin, AlertCircle, CheckCircle, Wrench } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Link from "next/link";
+import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
+
+const bikeSkills = [
+  { id: "flat-tire", label: "Lekke band" },
+  { id: "brakes", label: "Remmen" },
+  { id: "chain", label: "Ketting" },
+  { id: "gears", label: "Versnellingen" },
+  { id: "wheel-alignment", label: "Wiel uitlijning" },
+  { id: "lights", label: "Verlichting" },
+  { id: "general-maintenance", label: "Algemeen onderhoud" },
+];
 
 // Define the form schema
 const formSchema = z.object({
@@ -39,6 +52,10 @@ const formSchema = z.object({
   postalCode: z.string().regex(/^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i, "Ongeldige postcode (bijv. 1234 AB)"),
   phoneNumber: z.string().regex(/^(\+31|0)6[0-9]{8}$/, "Ongeldig telefoonnummer (bijv. 0612345678)"),
   referralCode: z.string().optional(),
+  // Fixer specific fields
+  skills: z.array(z.string()).optional(),
+  hourlyRate: z.number().optional(),
+  isAvailable: z.boolean().optional(),
 });
 
 // Create a separate component for the signup form content
@@ -48,6 +65,7 @@ function SignupFormContent() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState<string | null>(null);
+  const [showFixerFields, setShowFixerFields] = useState(false);
 
   const role = searchParams.get("role");
   const referralCode = searchParams.get("ref");
@@ -62,8 +80,17 @@ function SignupFormContent() {
       postalCode: "",
       phoneNumber: "",
       referralCode: referralCode || "",
+      skills: [],
+      hourlyRate: 10,
+      isAvailable: true,
     },
   });
+
+  // Watch the role field to show/hide fixer fields
+  const selectedRole = form.watch("role");
+  useEffect(() => {
+    setShowFixerFields(selectedRole === "FIXER");
+  }, [selectedRole]);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -259,6 +286,111 @@ function SignupFormContent() {
               )}
             />
           </div>
+
+          {showFixerFields && (
+            <>
+              <FormField
+                control={form.control}
+                name="skills"
+                render={() => (
+                  <FormItem>
+                    <FormLabel>Fietsreparatie vaardigheden</FormLabel>
+                    <FormDescription>
+                      Selecteer alle reparaties die je kunt uitvoeren
+                    </FormDescription>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                      {bikeSkills.map((skill) => (
+                        <FormField
+                          key={skill.id}
+                          control={form.control}
+                          name="skills"
+                          render={({ field }) => {
+                            return (
+                              <FormItem
+                                key={skill.id}
+                                className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4"
+                              >
+                                <FormControl>
+                                  <Checkbox
+                                    checked={field.value?.includes(skill.id)}
+                                    onCheckedChange={(checked) => {
+                                      return checked
+                                        ? field.onChange([...field.value || [], skill.id])
+                                        : field.onChange(
+                                            field.value?.filter(
+                                              (value) => value !== skill.id
+                                            )
+                                          );
+                                    }}
+                                  />
+                                </FormControl>
+                                <FormLabel className="font-normal cursor-pointer">
+                                  {skill.label}
+                                </FormLabel>
+                              </FormItem>
+                            );
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="hourlyRate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Uurtarief (€)</FormLabel>
+                    <FormDescription>
+                      Stel je uurtarief in tussen €5 en €15
+                    </FormDescription>
+                    <div className="space-y-4">
+                      <Slider
+                        min={5}
+                        max={15}
+                        step={1}
+                        value={[field.value || 10]}
+                        onValueChange={(value) => field.onChange(value[0])}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between">
+                        <span>€5</span>
+                        <span className="font-bold text-blue-600">€{field.value || 10}</span>
+                        <span>€15</span>
+                      </div>
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="isAvailable"
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel className="font-normal cursor-pointer">
+                        Ik ben beschikbaar voor reparaties
+                      </FormLabel>
+                      <FormDescription>
+                        Je kunt dit later altijd wijzigen in je dashboard
+                      </FormDescription>
+                    </div>
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
           
           {referralCode && (
             <FormField
