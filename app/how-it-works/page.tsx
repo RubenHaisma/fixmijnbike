@@ -246,7 +246,7 @@ export default function HowItWorksPage() {
               { step: 1, icon: Wrench, title: "Maak je profiel aan", desc: "Meld je aan en geef aan welke reparaties je kunt doen", img: "/images/tim.jpg" },
               { step: 2, icon: Euro, title: "Stel je tarief in", desc: "Kies je uurtarief tussen €5-€15", img: "/images/stap3.jpg" },
               { step: 3, icon: Bicycle, title: "Ontvang reparaties", desc: "Krijg verzoeken van studenten in jouw buurt", img: "/images/bikefixing.jpg" },
-              { step: 4, icon: Euro, title: "Verdien geld", desc: "Ontvang €3 platformvergoeding plus je tarief", img: "/images/lisa.jpg" },
+              { step: 4, icon: Euro, title: "Verdien geld", desc: "Ontvang €3 platformvergoeding plus je tarief", img: "/images/sophie.jpg" },
             ].map((item, index) => (
               <motion.div 
                 key={index}
