@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD,
+    user: process.env.NEXT_PUBLIC_EMAIL_USER,
+    pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
   },
   tls: {
     rejectUnauthorized: false // Required for some production environments
@@ -197,7 +197,7 @@ export const sendVerificationEmail = async (email: string, token: string) => {
     const mailOptions = {
       from: {
         name: "FixMijnBike",
-        address: process.env.EMAIL_USER!
+        address: process.env.NEXT_PUBLIC_EMAIL_USER!
       },
       to: email,
       subject: 'Verifieer je e-mailadres voor FixMijnBike',
@@ -225,7 +225,7 @@ export const sendNotificationEmail = async (email: string, title: string, messag
     const mailOptions = {
       from: {
         name: "FixMijnBike",
-        address: process.env.EMAIL_USER!
+        address: process.env.NEXT_PUBLIC_EMAIL_USER!
       },
       to: email,
       subject: title,
