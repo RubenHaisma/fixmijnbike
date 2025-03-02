@@ -77,8 +77,8 @@ model Account {
   expires_at         Int?
   token_type         String?
   scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id_token          String?  @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -187,8 +187,6 @@ model Referral {
   referrer      User     @relation("Referrer", fields: [referrerId], references: [id])
   referred      User     @relation("Referred", fields: [referredId], references: [id])
 }
-
-// New models for enhanced functionality
 
 enum NotificationType {
   REPAIR_REQUEST
