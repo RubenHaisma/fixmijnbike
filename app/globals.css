@@ -84,8 +84,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image: url('/subtle-pattern.png');
-    background-repeat: repeat;
+    background-image: 
+      radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      radial-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
   }
 }
 
@@ -127,31 +130,38 @@
 /* Hero section styling */
 .hero-section {
   @apply w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-orange-50 to-white text-center;
-  background-image: url('/hero-pattern.png'), linear-gradient(to bottom, #fff5eb, #ffffff);
-  background-size: cover;
+  background-image: 
+    linear-gradient(to bottom, #fff5eb, #ffffff),
+    repeating-linear-gradient(45deg, rgba(255, 138, 0, 0.03) 0px, rgba(255, 138, 0, 0.03) 2px, transparent 2px, transparent 4px);
+  background-size: 100%, 20px 20px;
   background-position: center;
 }
 
 /* Feature section styling */
 .feature-section {
   @apply w-full py-12 md:py-24 bg-white text-center;
-  background-image: url('/feature-pattern.png');
-  background-size: cover;
+  background-image: 
+    radial-gradient(circle, rgba(0, 0, 0, 0.01) 1px, transparent 1px);
+  background-size: 20px 20px;
 }
 
 /* Testimonial section styling */
 .testimonial-section {
   @apply w-full py-12 md:py-24 bg-blue-50 text-center;
-  background-image: url('/testimonial-pattern.png'), linear-gradient(to bottom, #ebf5ff, #f0f7ff);
-  background-size: cover;
+  background-image: 
+    linear-gradient(to bottom, #ebf5ff, #f0f7ff),
+    repeating-linear-gradient(-45deg, rgba(71, 118, 230, 0.03) 0px, rgba(71, 118, 230, 0.03) 2px, transparent 2px, transparent 4px);
+  background-size: 100%, 20px 20px;
   background-position: center;
 }
 
 /* CTA section styling */
 .cta-section {
   @apply w-full py-12 md:py-24 text-white text-center;
-  background-image: url('/cta-pattern.png'), linear-gradient(to right, #ff8a00, #ff5e62, #4776e6);
-  background-size: cover;
+  background-image: 
+    linear-gradient(to right, #ff8a00, #ff5e62, #4776e6),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 2px, transparent 2px, transparent 4px);
+  background-size: 100%, 20px 20px;
   background-position: center;
 }
 

@@ -106,13 +106,6 @@ export default function BecomeFixerPage() {
                 <p className="text-gray-600 text-center">
                   Meld je aan als Fixer en geef aan welke reparaties je kunt uitvoeren
                 </p>
-                <Image 
-                  src="/fixer-step1.jpg" 
-                  alt="Maak je profiel aan" 
-                  width={250} 
-                  height={150} 
-                  className="rounded-lg mt-2 object-cover"
-                />
               </div>
               
               <div className="flex flex-col items-center space-y-4 p-6 rounded-xl border border-orange-200 bg-white shadow-sm card-hover">
@@ -123,13 +116,6 @@ export default function BecomeFixerPage() {
                 <p className="text-gray-600 text-center">
                   Bepaal zelf hoeveel je wilt verdienen per uur (€5-€15)
                 </p>
-                <Image 
-                  src="/fixer-step2.jpg" 
-                  alt="Stel je tarief in" 
-                  width={250} 
-                  height={150} 
-                  className="rounded-lg mt-2 object-cover"
-                />
               </div>
               
               <div className="flex flex-col items-center space-y-4 p-6 rounded-xl border border-pink-200 bg-white shadow-sm card-hover">
@@ -140,13 +126,6 @@ export default function BecomeFixerPage() {
                 <p className="text-gray-600 text-center">
                   Krijg reparatieverzoeken van studenten in jouw buurt
                 </p>
-                <Image 
-                  src="/fixer-step3.jpg" 
-                  alt="Ontvang reparaties" 
-                  width={250} 
-                  height={150} 
-                  className="rounded-lg mt-2 object-cover"
-                />
               </div>
             </div>
           </div>
@@ -159,7 +138,7 @@ export default function BecomeFixerPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="relative h-[500px] rounded-xl overflow-hidden shadow-xl">
               <Image 
-                src="/student-repairing-bike.jpg"
+                src="/bikefixing.jpg"
                 alt="Student repairing a bicycle"
                 fill
                 style={{ objectFit: 'cover' }}
@@ -226,7 +205,7 @@ export default function BecomeFixerPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center mb-4">
                     <Image 
-                      src="/testimonial-tim.jpg" 
+                      src="/tim.jpg" 
                       alt="Tim" 
                       width={60} 
                       height={60} 
@@ -254,7 +233,7 @@ export default function BecomeFixerPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center mb-4">
                     <Image 
-                      src="/testimonial-lisa.jpg" 
+                      src="/lisa.jpg" 
                       alt="Lisa" 
                       width={60} 
                       height={60} 
@@ -282,7 +261,7 @@ export default function BecomeFixerPage() {
                 <CardContent className="pt-6">
                   <div className="flex items-center mb-4">
                     <Image 
-                      src="/testimonial-martijn.jpg" 
+                      src="/martijn.jpg" 
                       alt="Martijn" 
                       width={60} 
                       height={60} 

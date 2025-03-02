@@ -51,7 +51,7 @@ export default function HowItWorksPage() {
                 Vertel ons wat er mis is met je fiets en upload een foto
               </p>
               <Image 
-                src="/rider-step1.jpg" 
+                src="/stap1.jpg" 
                 alt="Beschrijf je probleem" 
                 width={200} 
                 height={150} 
@@ -75,7 +75,7 @@ export default function HowItWorksPage() {
                 We matchen je met een beschikbare student-fixer in jouw buurt
               </p>
               <Image 
-                src="/rider-step2.jpg" 
+                src="/bikefixing.jpg" 
                 alt="Vind een Fixer" 
                 width={200} 
                 height={150} 
@@ -99,7 +99,7 @@ export default function HowItWorksPage() {
                 Betaal €4 platformkosten en plan een reparatie wanneer het jou uitkomt
               </p>
               <Image 
-                src="/rider-step3.jpg" 
+                src="/stap3.jpg" 
                 alt="Betaal en boek" 
                 width={200} 
                 height={150} 
@@ -123,7 +123,7 @@ export default function HowItWorksPage() {
                 De fixer repareert je fiets en je betaalt alleen voor de reparatie
               </p>
               <Image 
-                src="/rider-step4.jpg" 
+                src="/sophie.jpg" 
                 alt="Fiets gerepareerd!" 
                 width={200} 
                 height={150} 
@@ -168,13 +168,6 @@ export default function HowItWorksPage() {
               <p className="text-gray-600 text-center">
                 Meld je aan als Fixer en geef aan welke reparaties je kunt uitvoeren
               </p>
-              <Image 
-                src="/fixer-profile.jpg" 
-                alt="Maak je profiel aan" 
-                width={200} 
-                height={150} 
-                className="rounded-lg mt-2 shadow-md"
-              />
               
               {/* Arrow for desktop */}
               <div className="hidden md:block absolute top-12 right-0 w-full h-4 transform translate-x-1/2">
@@ -192,13 +185,6 @@ export default function HowItWorksPage() {
               <p className="text-gray-600 text-center">
                 Bepaal zelf hoeveel je wilt verdienen per uur (€5-€15)
               </p>
-              <Image 
-                src="/fixer-rate.jpg" 
-                alt="Stel je tarief in" 
-                width={200} 
-                height={150} 
-                className="rounded-lg mt-2 shadow-md"
-              />
               
               {/* Arrow for desktop */}
               <div className="hidden md:block absolute top-12 right-0 w-full h-4 transform translate-x-1/2">
@@ -216,13 +202,6 @@ export default function HowItWorksPage() {
               <p className="text-gray-600 text-center">
                 Krijg reparatieverzoeken van studenten in jouw buurt
               </p>
-              <Image 
-                src="/fixer-requests.jpg" 
-                alt="Ontvang reparaties" 
-                width={200} 
-                height={150} 
-                className="rounded-lg mt-2 shadow-md"
-              />
               
               {/* Arrow for desktop */}
               <div className="hidden md:block absolute top-12 right-0 w-full h-4 transform translate-x-1/2">
@@ -240,13 +219,6 @@ export default function HowItWorksPage() {
               <p className="text-gray-600 text-center">
                 Ontvang €3 platformvergoeding plus je reparatietarief voor elke voltooide reparatie
               </p>
-              <Image 
-                src="/fixer-earnings.jpg" 
-                alt="Verdien geld" 
-                width={200} 
-                height={150} 
-                className="rounded-lg mt-2 shadow-md"
-              />
             </div>
           </div>
           
@@ -437,7 +409,7 @@ export default function HowItWorksPage() {
                   Fix Mijn Fiets
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button asChild size="lg" variant="outline" className="border-white text-black/80 hover:bg-white/10">
                 <Link href="/become-fixer">
                   <Wrench className="mr-2 h-5 w-5" />
                   Word een Fixer

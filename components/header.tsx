@@ -49,46 +49,29 @@ export function Header() {
           </Link>
           
           {session ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                  {session.user?.image ? (
-                    <Image 
-                      src={session.user.image} 
-                      alt={session.user.name || "Profielfoto"} 
-                      fill 
-                      className="rounded-full object-cover"
-                    />
-                  ) : (
-                    <User className="h-5 w-5" />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>Mijn Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/dashboard" className="w-full cursor-pointer">Dashboard</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/profile" className="w-full cursor-pointer">Profiel</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
-                  Uitloggen
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <div className="flex items-center gap-4">
+              <Link href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
+          Dashboard
+              </Link>
+              <Button 
+          variant="outline" 
+          size="sm" 
+          onClick={() => signOut()} 
+          className="cursor-pointer"
+              >
+          Uitloggen
+              </Button>
+            </div>
           ) : (
             <div className="flex items-center gap-2">
               <Button asChild variant="ghost" size="sm">
-                <Link href="/login">
-                  <LogIn className="mr-2 h-4 w-4" />
-                  Inloggen
-                </Link>
+          <Link href="/login">
+            <LogIn className="mr-2 h-4 w-4" />
+            Inloggen
+          </Link>
               </Button>
               <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
-                <Link href="/signup">Aanmelden</Link>
+          <Link href="/signup">Aanmelden</Link>
               </Button>
             </div>
           )}
