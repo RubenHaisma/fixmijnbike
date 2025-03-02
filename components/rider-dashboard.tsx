@@ -62,7 +62,7 @@ export function RiderDashboard() {
       case "PENDING":
         return <Badge variant="outline" className="bg-yellow-100 text-yellow-800 hover:bg-yellow-100">Wachtend</Badge>;
       case "MATCHED":
-        return <Badge variant="outline" className="bg-blue-100 text-blue-800 hover:bg-blue-100">Gematcht</Badge>;
+        return <Badge variant="outline" className="bg-blue-100 text-blue-800 hover:bg-blue- 100">Gematcht</Badge>;
       case "BOOKED":
         return <Badge variant="outline" className="bg-green-100 text-green-800 hover:bg-green-100">Geboekt</Badge>;
       case "COMPLETED":
@@ -84,6 +84,17 @@ export function RiderDashboard() {
       minute: '2-digit'
     }).format(date);
   }
+
+  const issueTypes: Record<string, string> = {
+    "flat-tire": "Lekke band",
+    "brakes": "Remmen",
+    "chain": "Ketting",
+    "gears": "Versnellingen",
+    "wheel-alignment": "Wiel uitlijning",
+    "lights": "Verlichting",
+    "general-maintenance": "Algemeen onderhoud",
+    "other": "Anders"
+  };
 
   return (
     <div className="container py-10">
@@ -198,7 +209,7 @@ export function RiderDashboard() {
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle>{repair.issueType}</CardTitle>
+                            <CardTitle>{issueTypes[repair.issueType] || repair.issueType}</CardTitle>
                             <CardDescription>
                               Aangevraagd op {formatDate(repair.createdAt)}
                             </CardDescription>
@@ -266,12 +277,6 @@ export function RiderDashboard() {
                             Details
                           </Link>
                         </Button>
-                        
-                        {repair.status !== "PENDING" && (
-                          <Button variant="ghost" size="sm" className="text-red-500 hover:text-red-700 hover:bg-red-50">
-                            Annuleren
-                          </Button>
-                        )}
                       </CardFooter>
                     </Card>
                   ))
@@ -318,7 +323,7 @@ export function RiderDashboard() {
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle>{repair.issueType}</CardTitle>
+                            <CardTitle>{issueTypes[repair.issueType] || repair.issueType}</CardTitle>
                             <CardDescription>
                               {repair.status === "COMPLETED" 
                                 ? `Gerepareerd op ${formatDate(repair.bookingTime || repair.createdAt)}`

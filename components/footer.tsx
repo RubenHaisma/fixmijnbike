@@ -15,15 +15,15 @@ export function Footer() {
               Fietsreparatie door studenten, voor studenten. Betaalbaar, snel en gemakkelijk.
             </p>
             <div className="flex items-center gap-4">
-              <Link href="https://instagram.com" className="text-muted-foreground hover:text-orange-500 transition-colors">
+              <Link href="https://instagram.com" className="text-muted-foreground hover:text-orange-500 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="https://facebook.com" className="text-muted-foreground hover:text-orange-500 transition-colors">
+              <Link href="https://facebook.com" className="text-muted-foreground hover:text-orange-500 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="https://twitter.com" className="text-muted-foreground hover:text-orange-500 transition-colors">
+              <Link href="https://twitter.com" className="text-muted-foreground hover:text-orange-500 transition-colors" target="_blank" rel="noopener noreferrer">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
@@ -103,7 +103,7 @@ export function Footer() {
         
         <div className="mt-8 border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground">
-            © 2025 BikeFixNL. Alle rechten voorbehouden.
+            © {new Date().getFullYear()} BikeFixNL. Alle rechten voorbehouden.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/terms" className="text-xs text-muted-foreground hover:text-orange-500 transition-colors">

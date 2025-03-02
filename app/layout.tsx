@@ -22,6 +22,9 @@ export const metadata: Metadata = {
     description: 'Verbind studenten met fietsreparatie behoeften aan student "fixers" die extra geld verdienen',
     siteName: 'BikeFixNL',
   },
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({

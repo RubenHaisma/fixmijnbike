@@ -141,3 +141,28 @@
 .cta-section {
   @apply w-full py-12 md:py-24 bg-gradient-to-r from-orange-500 via-red-500 to-blue-600 text-white text-center;
 }
+
+/* Loading spinner */
+.loading-spinner {
+  @apply animate-spin h-5 w-5 text-white;
+}
+
+/* Improved form styling */
+.form-container {
+  @apply max-w-md mx-auto p-6 bg-white rounded-lg shadow-md;
+}
+
+/* Responsive image container */
+.img-container {
+  @apply relative overflow-hidden rounded-lg;
+}
+
+/* Accessibility improvements */
+.sr-only {
+  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+}
+
+/* Focus styles for better accessibility */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
+}

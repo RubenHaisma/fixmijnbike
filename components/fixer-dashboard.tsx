@@ -166,6 +166,17 @@ export function FixerDashboard() {
     }
   }
 
+  const issueTypes: Record<string, string> = {
+    "flat-tire": "Lekke band",
+    "brakes": "Remmen",
+    "chain": "Ketting",
+    "gears": "Versnellingen",
+    "wheel-alignment": "Wiel uitlijning",
+    "lights": "Verlichting",
+    "general-maintenance": "Algemeen onderhoud",
+    "other": "Anders"
+  };
+
   return (
     <div className="container py-10">
       <h1 className="text-3xl font-bold mb-6">Welkom, {session?.user?.name}</h1>
@@ -306,7 +317,7 @@ export function FixerDashboard() {
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle>{repair.issueType}</CardTitle>
+                            <CardTitle>{issueTypes[repair.issueType] || repair.issueType}</CardTitle>
                             <CardDescription>
                               {repair.status === "MATCHED" 
                                 ? `Gematcht op ${formatDate(repair.createdAt)}`
@@ -430,7 +441,7 @@ export function FixerDashboard() {
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle>{repair.issueType}</CardTitle>
+                            <CardTitle>{issueTypes[repair.issueType] || repair.issueType}</CardTitle>
                             <CardDescription>
                               {repair.status === "COMPLETED" 
                                 ? `Voltooid op ${formatDate(repair.updatedAt || repair.createdAt)}`
@@ -447,7 +458,7 @@ export function FixerDashboard() {
                           </p>
                           
                           <p>
-                            <strong>Probleem:</strong> {repair.issueType}
+                            <strong>Probleem:</strong> {issueTypes[repair.issueType] || repair.issueType}
                             {repair.description && ` - ${repair.description}`}
                           </p>
                           

@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, XCircle, AlertTriangle, Phone, MapPin, Euro, Clock } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
 import Image from "next/image";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -24,12 +25,14 @@ type RepairDetailsProps = {
 export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   const isRider = userId === repair.riderId;
   const isFixer = userId === repair.fixerId;
   
   async function handlePayment() {
     setIsLoading(true);
+    setError(null);
     
     try {
       const response = await fetch(`/api/payments/create-session`, {
@@ -48,6 +51,13 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
         throw new Error(session.error || "Er is een fout opgetreden");
       }
       
+      // If payment was processed with wallet balance
+      if (session.success) {
+        router.push(session.redirect);
+        router.refresh();
+        return;
+      }
+      
       // Redirect to Stripe Checkout
       const stripe = await stripePromise;
       const { error } = await stripe!.redirectToCheckout({
@@ -57,8 +67,9 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
       if (error) {
         throw new Error(error.message || "Er is een fout opgetreden");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Payment error:", error);
+      setError(error.message || "Er is een fout opgetreden bij het verwerken van de betaling");
     } finally {
       setIsLoading(false);
     }
@@ -66,6 +77,7 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
   
   async function markAsCompleted() {
     setIsLoading(true);
+    setError(null);
     
     try {
       const response = await fetch(`/api/repairs/${repair.id}/complete`, {
@@ -73,12 +85,14 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
       });
       
       if (!response.ok) {
-        throw new Error("Er is een fout opgetreden");
+        const data = await response.json();
+        throw new Error(data.error || "Er is een fout opgetreden");
       }
       
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error marking as completed:", error);
+      setError(error.message || "Er is een fout opgetreden bij het markeren als voltooid");
     } finally {
       setIsLoading(false);
     }
@@ -86,6 +100,7 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
   
   async function cancelRepair() {
     setIsLoading(true);
+    setError(null);
     
     try {
       const response = await fetch(`/api/repairs/${repair.id}/cancel`, {
@@ -93,12 +108,14 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
       });
       
       if (!response.ok) {
-        throw new Error("Er is een fout opgetreden");
+        const data = await response.json();
+        throw new Error(data.error || "Er is een fout opgetreden");
       }
       
       router.refresh();
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error cancelling repair:", error);
+      setError(error.message || "Er is een fout opgetreden bij het annuleren");
     } finally {
       setIsLoading(false);
     }
@@ -157,6 +174,13 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
           {getStatusBadge(repair.status)}
         </div>
         
+        {error && (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+        
         <Card>
           <CardHeader>
             <CardTitle>Reparatie informatie</CardTitle>
@@ -209,6 +233,8 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
                   <Image
                     src={repair.imageUrl} 
                     alt="Bike issue" 
+                    width={600}
+                    height={400}
                     className="w-full h-auto max-h-64 object-cover"
                   />
                 </div>
@@ -262,7 +288,9 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
                         <h3 className="font-medium">Telefoonnummer</h3>
                         <p className="flex items-center">
                           <Phone className="h-4 w-4 mr-1 text-muted-foreground" />
-                          {repair.fixer.phoneNumber}
+                          <a href={`tel:${repair.fixer.phoneNumber}`} className="hover:text-blue-600 transition-colors">
+                            {repair.fixer.phoneNumber}
+                          </a>
                         </p>
                       </div>
                     )}
@@ -298,7 +326,9 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
                         <h3 className="font-medium">Telefoonnummer</h3>
                         <p className="flex items-center">
                           <Phone className="h-4 w-4 mr-1 text-muted-foreground" />
-                          {repair.rider.phoneNumber}
+                          <a href={`tel:${repair.rider.phoneNumber}`} className="hover:text-blue-600 transition-colors">
+                            {repair.rider.phoneNumber}
+                          </a>
                         </p>
                       </div>
                     )}
@@ -306,7 +336,7 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
                     <div>
                       <h3 className="font-medium">Locatie</h3>
                       <p className="flex items-center">
-                        <MapPin className="h-4 w-4 mr-1 text-muted-foreground" />
+                        <MapPin className="h-4 w-4 mr-1 text -muted-foreground" />
                         {repair.rider.postalCode}
                       </p>
                     </div>
@@ -330,7 +360,20 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
               disabled={isLoading}
               className="flex-1 bg-orange-500 hover:bg-orange-600"
             >
-              {isLoading ? "Bezig..." : "Nu boeken (€4)"}
+              {isLoading ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Bezig...
+                </span>
+              ) : (
+                <>
+                  <Euro className="mr-2 h-4 w-4" />
+                  Nu boeken (€4)
+                </>
+              )}
             </Button>
           )}
           
@@ -340,8 +383,20 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
               disabled={isLoading}
               className="flex-1 bg-green-600 hover:bg-green-700"
             >
-              <CheckCircle className="mr-2 h-4 w-4" />
-              {isLoading ? "Bezig..." : "Markeer als voltooid"}
+              {isLoading ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Bezig...
+                </span>
+              ) : (
+                <>
+                  <CheckCircle className="mr-2 h-4 w-4" />
+                  Markeer als voltooid
+                </>
+              )}
             </Button>
           )}
           
@@ -352,8 +407,20 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
               variant="destructive"
               className="flex-1"
             >
-              <XCircle className="mr-2 h-4 w-4" />
-              {isLoading ? "Bezig..." : "Annuleren"}
+              {isLoading ? (
+                <span className="flex items-center">
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Bezig...
+                </span>
+              ) : (
+                <>
+                  <XCircle className="mr-2 h-4 w-4" />
+                  Annuleren
+                </>
+              )}
             </Button>
           )}
         </div>

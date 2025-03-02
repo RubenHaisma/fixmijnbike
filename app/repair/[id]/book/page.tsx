@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bicycle, Euro, Clock, CheckCircle, AlertCircle } from "lucide-react";
+import { Euro, CheckCircle, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Skeleton } from "@/components/ui/skeleton";
 import { loadStripe } from "@stripe/stripe-js";
@@ -143,7 +143,133 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
         <div className="flex flex-col space-y-6">
           <Skeleton className="h-8 w-64" />
           <Skeleton className="h-4 w-40" />
-          <Skeleton className="h-[400px] w
-    )
+          <Skeleton className="h-[400px] w-full" />
+        </div>
+      </div>
+    );
   }
+
+  return (
+    <div className="container max-w-3xl py-12">
+      <div className="flex flex-col space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold">Reparatie boeken</h1>
+          <p className="text-muted-foreground">
+            {repair && issueTypes[repair.issueType] || repair?.issueType}
+          </p>
+        </div>
+        
+        {error && (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
+        
+        <Card>
+          <CardHeader>
+            <CardTitle>Reparatie details</CardTitle>
+            <CardDescription>
+              Controleer de details voordat je betaalt
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 className="font-medium">Probleem</h3>
+                <p>{repair && issueTypes[repair.issueType] || repair?.issueType}</p>
+              </div>
+              
+              <div>
+                <h3 className="font-medium">Locatie</h3>
+                <p>{repair?.postalCode}</p>
+              </div>
+              
+              {repair?.description && (
+                <div className="col-span-2">
+                  <h3 className="font-medium">Beschrijving</h3>
+                  <p>{repair.description}</p>
+                </div>
+              )}
+              
+              <div>
+                <h3 className="font-medium">Fixer</h3>
+                <p>{repair?.fixer?.name}</p>
+              </div>
+              
+              <div>
+                <h3 className="font-medium">Uurtarief</h3>
+                <p>€{repair?.fixer?.hourlyRate?.toFixed(2) || "?"}/uur</p>
+              </div>
+            </div>
+            
+            <div className="border-t pt-4">
+              <h3 className="font-medium mb-2">Kosten</h3>
+              <div className="space-y-1">
+                <div className="flex justify-between">
+                  <span>Platformkosten:</span>
+                  <span>€{repair?.platformFee.toFixed(2)}</span>
+                </div>
+                
+                <div className="flex justify-between">
+                  <span>Reparatiekosten (schatting):</span>
+                  <span>€{(repair?.repairCost || 0).toFixed(2)}</span>
+                </div>
+                
+                <div className="flex justify-between font-medium pt-1 border-t">
+                  <span>Totaal:</span>
+                  <span>€{((repair?.platformFee || 4) + (repair?.repairCost || 0)).toFixed(2)}</span>
+                </div>
+                
+                <p className="text-xs text-muted-foreground mt-2">
+                  Je betaalt nu alleen de platformkosten (€{repair?.platformFee.toFixed(2)}). 
+                  De reparatiekosten betaal je direct aan de fixer na de reparatie.
+                </p>
+              </div>
+            </div>
+            
+            {walletBalance >= (repair?.platformFee || 4) && (
+              <Alert className="bg-green-50 border-green-200">
+                <CheckCircle className="h-4 w-4 text-green-600" />
+                <AlertDescription className="text-green-800">
+                  Je hebt voldoende saldo (€{walletBalance.toFixed(2)}) om deze boeking te betalen met je wallet!
+                </AlertDescription>
+              </Alert>
+            )}
+          </CardContent>
+          <CardFooter className="flex flex-col sm:flex-row gap-4">
+            <Button 
+              variant="outline" 
+              className="w-full sm:w-auto" 
+              asChild
+            >
+              <Link href={`/repair/${params.id}`}>
+                Terug
+              </Link>
+            </Button>
+            
+            <Button 
+              onClick={handlePayment} 
+              className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 button-hover"
+              disabled={isProcessing}
+            >
+              {isProcessing ? (
+                "Bezig met verwerken..."
+              ) : walletBalance >= (repair?.platformFee || 4) ? (
+                <>
+                  <Euro className="mr-2 h-4 w-4" />
+                  Betalen met wallet saldo
+                </>
+              ) : (
+                <>
+                  <Euro className="mr-2 h-4 w-4" />
+                  Betalen (€{repair?.platformFee.toFixed(2)})
+                </>
+              )}
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+    </div>
+  );
 }

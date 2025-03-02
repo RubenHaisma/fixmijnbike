@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Image from "next/image";
 
 export function Header() {
   const { data: session } = useSession();

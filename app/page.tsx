@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center w-full">
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section w-full">
         <div className="container">
           <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <div className="space-y-4">
@@ -40,7 +40,7 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="feature-section">
+      <section className="feature-section w-full">
         <div className="container">
           <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <div className="space-y-2">
@@ -88,7 +88,7 @@ export default function Home() {
       </section>
 
       {/* Benefits */}
-      <section className="testimonial-section">
+      <section className="testimonial-section w-full">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
             <div className="space-y-6">
@@ -143,6 +143,7 @@ export default function Home() {
                 fill
                 style={{ objectFit: 'cover' }}
                 className="rounded-lg"
+                priority
               />
             </div>
           </div>
@@ -150,7 +151,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="feature-section">
+      <section className="feature-section w-full">
         <div className="container">
           <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
@@ -159,51 +160,47 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
               <div className="p-6 bg-orange-50 rounded-lg border border-orange-100 card-hover">
-              <div className="flex items-center gap-4 mb-4">
-                <p className="italic text-gray-700">
-                &quot;Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!&quot;
+                <p className="italic text-gray-700 mb-4">
+                  &quot;Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!&quot;
                 </p>
-              </div>
-              <p className="font-semibold">Emma, UvA student</p>
-              <div className="h-48 w-48 relative rounded-full overflow-hidden mt-2 ml-4">
-                <Image 
-                  src="/emma.jpg" 
-                  alt="Emma, UvA student" 
-                  fill
-                  className="object-cover"
-                />
+                <p className="font-semibold">Emma, UvA student</p>
+                <div className="h-16 w-16 relative rounded-full overflow-hidden mt-2">
+                  <Image 
+                    src="/emma.jpg" 
+                    alt="Emma, UvA student" 
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
-              
               
               <div className="p-6 bg-blue-50 rounded-lg border border-blue-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Als Fixer verdien ik nu ongeveer €150 per week extra. Perfect naast mijn studie en ik help er andere studenten mee.&quot;
                 </p>
                 <p className="font-semibold">Tim, TU Delft student</p>
-                <div className="h-48 w-48 relative rounded-full overflow-hidden mt-2 ml-4">
-                <Image 
-                  src="/tim.jpg" 
-                  alt="Emma, UvA student" 
-                  fill
-                  className="object-cover"
-                />
+                <div className="h-16 w-16 relative rounded-full overflow-hidden mt-2">
+                  <Image 
+                    src="/tim.jpg" 
+                    alt="Tim, TU Delft student" 
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
-              
               
               <div className="p-6 bg-red-50 rounded-lg border border-red-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Lekke band op zondag en alle winkels dicht. Dankzij BikeFixNL kon ik dezelfde dag nog naar college fietsen!&quot;
                 </p>
                 <p className="font-semibold">Sophie, RUG student</p>
-                <div className="h-48 w-48 relative rounded-full overflow-hidden mt-2 ml-4">
-                <Image 
-                  src="/sophie.jpg" 
-                  alt="Emma, UvA student" 
-                  fill
-                  className="object-cover"
-                />
+                <div className="h-16 w-16 relative rounded-full overflow-hidden mt-2">
+                  <Image 
+                    src="/sophie.jpg" 
+                    alt="Sophie, RUG student" 
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </div>
@@ -212,7 +209,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="cta-section">
+      <section className="cta-section w-full">
         <div className="container">
           <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
@@ -228,7 +225,7 @@ export default function Home() {
                   Repareer Mijn Fiets
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-black/80 hover:bg-white/10 button-hover">
+              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 button-hover">
                 <Link href="/become-fixer">
                   <Wrench className="mr-2 h-5 w-5" />
                   Word een Fixer
