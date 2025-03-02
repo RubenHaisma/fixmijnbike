@@ -69,7 +69,7 @@ export default function Home() {
                   Vertel ons wat er mis is met je fiets en upload een foto
                 </p>
                 <Image 
-                  src="/step1-describe.jpg" 
+                  src="/stap1.jpg" 
                   alt="Beschrijf je probleem" 
                   width={250} 
                   height={150} 
@@ -86,7 +86,7 @@ export default function Home() {
                   Bekijk beschikbare student-fixers in jouw buurt en hun tarieven
                 </p>
                 <Image 
-                  src="/step2-choose.jpg" 
+                  src="/tim.jpg" 
                   alt="Kies een Fixer" 
                   width={250} 
                   height={150} 
@@ -103,7 +103,7 @@ export default function Home() {
                   Betaal €4 platformkosten en plan een reparatie wanneer het jou uitkomt
                 </p>
                 <Image 
-                  src="/step3-book.jpg" 
+                  src="/stap3.jpg" 
                   alt="Boek een tijdslot" 
                   width={250} 
                   height={150} 
@@ -281,7 +281,7 @@ export default function Home() {
                   name: "Martijn",
                   university: "Groningen",
                   specialty: "Elektrische fietsen",
-                  image: "/fixer-martijn.jpg",
+                  image: "/martijn.jpg",
                   rating: 4.9,
                   reviews: 51
                 },
@@ -289,7 +289,7 @@ export default function Home() {
                   name: "Maarten",
                   university: "UU",
                   specialty: "Lekke banden",
-                  image: "/fixer-anouk.jpg",
+                  image: "/maarten.jpg",
                   rating: 4.7,
                   reviews: 29
                 }
