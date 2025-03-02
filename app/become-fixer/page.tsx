@@ -55,13 +55,13 @@ export default function BecomeFixerPage() {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-blue-50 to-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-blue-600">
+      <section className="hero-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl text-blue-600">
                 Word een BikeFixNL Fixer
               </h1>
               <p className="text-xl font-semibold text-orange-500">
@@ -73,7 +73,7 @@ export default function BecomeFixerPage() {
             </div>
             <Button 
               size="lg" 
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-blue-600 hover:bg-blue-700 button-hover"
               onClick={handleBecomeFixerClick}
               disabled={isLoading}
             >
@@ -85,9 +85,9 @@ export default function BecomeFixerPage() {
       </section>
 
       {/* How It Works */}
-      <section className="w-full py-12 md:py-24 bg-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
+      <section className="feature-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
                 Hoe het werkt
@@ -97,8 +97,8 @@ export default function BecomeFixerPage() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-              <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
+              <div className="flex flex-col items-center space-y-4 p-6 rounded-lg border border-gray-200 card-hover">
                 <div className="p-3 rounded-full bg-blue-100">
                   <Wrench className="h-8 w-8 text-blue-600" />
                 </div>
@@ -108,7 +108,7 @@ export default function BecomeFixerPage() {
                 </p>
               </div>
               
-              <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
+              <div className="flex flex-col items-center space-y-4 p-6 rounded-lg border border-gray-200 card-hover">
                 <div className="p-3 rounded-full bg-orange-100">
                   <Euro className="h-8 w-8 text-orange-500" />
                 </div>
@@ -118,7 +118,7 @@ export default function BecomeFixerPage() {
                 </p>
               </div>
               
-              <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
+              <div className="flex flex-col items-center space-y-4 p-6 rounded-lg border border-gray-200 card-hover">
                 <div className="p-3 rounded-full bg-green-100">
                   <CheckCircle className="h-8 w-8 text-green-600" />
                 </div>
@@ -133,10 +133,10 @@ export default function BecomeFixerPage() {
       </section>
 
       {/* Benefits */}
-      <section className="w-full py-12 md:py-24 bg-blue-50">
-        <div className="container px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-[400px] rounded-lg overflow-hidden">
+      <section className="testimonial-section">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <Image 
                 src="https://images.unsplash.com/photo-1529236183275-4fdcf2bc987e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                 alt="Student repairing a bicycle"
@@ -146,7 +146,7 @@ export default function BecomeFixerPage() {
               />
             </div>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
                 Voordelen voor Fixers
               </h2>
@@ -183,7 +183,7 @@ export default function BecomeFixerPage() {
                 </div>
               </div>
               
-              <Button onClick={handleBecomeFixerClick} className="mt-4 bg-blue-600 hover:bg-blue-700" disabled={isLoading}>
+              <Button onClick={handleBecomeFixerClick} className="mt-4 bg-blue-600 hover:bg-blue-700 button-hover" disabled={isLoading}>
                 {isLoading ? "Bezig..." : "Word nu een Fixer"}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
@@ -193,15 +193,15 @@ export default function BecomeFixerPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="w-full py-12 md:py-24 bg-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
+      <section className="feature-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
               Wat andere Fixers zeggen
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-              <Card className="text-left">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
+              <Card className="text-left card-hover">
                 <CardContent className="pt-6">
                   <p className="italic text-gray-700 mb-4">
                     "Als student heb ik altijd al een passie gehad voor fietsen. Nu verdien ik €150-€200 per week extra door andere studenten te helpen met hun fietsreparaties!"
@@ -218,7 +218,7 @@ export default function BecomeFixerPage() {
                 </CardContent>
               </Card>
               
-              <Card className="text-left">
+              <Card className="text-left card-hover">
                 <CardContent className="pt-6">
                   <p className="italic text-gray-700 mb-4">
                     "Ik repareer al jaren fietsen als hobby. BikeFixNL heeft me geholpen om deze vaardigheid om te zetten in een leuke bijbaan die ik naast mijn studie kan doen."
@@ -235,7 +235,7 @@ export default function BecomeFixerPage() {
                 </CardContent>
               </Card>
               
-              <Card className="text-left">
+              <Card className="text-left card-hover">
                 <CardContent className="pt-6">
                   <p className="italic text-gray-700 mb-4">
                     "Het platform is super gebruiksvriendelijk. Ik kan mijn beschikbaarheid aanpassen wanneer ik wil en alleen reparaties aannemen die bij mijn vaardigheden passen."
@@ -257,12 +257,52 @@ export default function BecomeFixerPage() {
       </section>
 
       {/* FAQ */}
-      <section className="w-full py-12 md:py-24 bg-gray-50">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center mb-8">
+      <section className="testimonial-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
               Veelgestelde vragen
             </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 w-full">
+              <div className="border rounded-lg p-6 bg-white shadow-sm card-hover">
+                <h3 className="text-lg font-bold mb-2">Hoe word ik betaald?</h3>
+                <p className="text-gray-600">
+                  Je ontvangt €3 platformvergoeding per voltooide reparatie direct op je BikeFixNL-saldo. De reparatiekosten ontvang je contant of via Tikkie van de student.
+                </p>
+              </div>
+              
+              <div className="border rounded-lg p-6 bg-white shadow-sm card-hover">
+                <h3 className="text-lg font-bold mb-2">Heb ik gereedschap nodig?</h3>
+                <p className="text-gray-600">
+                  Ja, je hebt basisgereedschap nodig voor fietsreparaties. Je kunt aangeven welke reparaties je kunt uitvoeren op basis van het gereedschap dat je hebt.
+                </p>
+              </div>
+              
+              <div className="border rounded-lg p-6 bg-white shadow-sm card-hover">
+                <h3 className="text-lg font-bold mb-2">Hoeveel kan ik verdienen?</h3>
+                <p className="text-gray-600">
+                  Afhankelijk van je uurtarief, vaardigheden en beschikbaarheid kun je tussen €50 en €200 per week verdienen. Onze meest actieve fixers verdienen gemiddeld €150 per week.
+                </p>
+              </div>
+              
+              <div className="border rounded-lg p-6 bg-white shadow-sm card-hover">
+                <h3 className="text-lg font-bold mb-2">Moet ik belasting betalen?</h3>
+                <p className="text-gray-600">
+                  Als student kun je tot een bepaald bedrag bijverdienen zonder belasting te betalen. Raadpleeg de Belastingdienst voor de actuele regels en je persoonlijke situatie.
+                </p>
+              </div>
+            </div>
+            
+            <Button 
+              onClick={handleBecomeFixerClick} 
+              className="mt-8 bg-blue-600 hover:bg-blue-700 button-hover" 
+              size="lg"
+              disabled={isLoading}
+            >
+              <Wrench className="mr-2 h-5 w-5" />
+              {isLoading ? "Bezig..." : "Word nu een Fixer"}
+            </Button>
           </div>
         </div>
       </section>

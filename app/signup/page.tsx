@@ -105,8 +105,8 @@ export default function SignupPage() {
   return (
     <div className="container flex items-center justify-center min-h-[calc(100vh-4rem)] py-12">
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[450px]">
-        <div className="flex flex-col space-y-2 text-center">
-          <div className="flex justify-center">
+        <div className="flex flex-col items-center space-y-4 text-center">
+          <div className="p-3 rounded-full bg-orange-100">
             <Bike className="h-10 w-10 text-orange-500" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight">
@@ -261,7 +261,7 @@ export default function SignupPage() {
             
             <Button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600"
+              className="w-full bg-orange-500 hover:bg-orange-600 button-hover"
               disabled={isLoading}
             >
               {isLoading ? "Bezig met aanmelden..." : "Aanmelden"}
@@ -283,7 +283,7 @@ export default function SignupPage() {
         <Button
           variant="outline"
           type="button"
-          className="w-full"
+          className="w-full button-hover"
           onClick={() => signIn("google", { callbackUrl: "/onboarding/role" })}
           disabled={isLoading}
         >
@@ -316,7 +316,7 @@ export default function SignupPage() {
           Al een account?{" "}
           <Link
             href="/login"
-            className="underline underline-offset-4 hover:text-orange-500"
+            className="underline underline-offset-4 hover:text-orange-500 transition-colors"
           >
             Log in
           </Link>

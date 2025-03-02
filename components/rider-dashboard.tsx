@@ -90,7 +90,7 @@ export function RiderDashboard() {
       <h1 className="text-3xl font-bold mb-6">Welkom, {session?.user?.name}</h1>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card>
+        <Card className="card-hover">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Saldo</CardTitle>
             <CardDescription>Je huidige tegoed</CardDescription>
@@ -113,7 +113,7 @@ export function RiderDashboard() {
           </CardFooter>
         </Card>
         
-        <Card>
+        <Card className="card-hover">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Reparaties</CardTitle>
             <CardDescription>Je fietsreparaties</CardDescription>
@@ -134,13 +134,13 @@ export function RiderDashboard() {
           </CardFooter>
         </Card>
         
-        <Card className="bg-orange-50 border-orange-200">
+        <Card className="bg-orange-50 border-orange-200 card-hover">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Nieuwe reparatie</CardTitle>
             <CardDescription>Laat je fiets repareren</CardDescription>
           </CardHeader>
           <CardContent className="pt-4">
-            <Button asChild className="w-full bg-orange-500 hover:bg-orange-600">
+            <Button asChild className="w-full bg-orange-500 hover:bg-orange-600 button-hover">
               <Link href="/repair">
                 <Bike className="mr-2 h-4 w-4" />
                 Reparatie aanvragen
@@ -194,7 +194,7 @@ export function RiderDashboard() {
                   .filter(repair => ["PENDING", "MATCHED", "BOOKED"].includes(repair.status))
                   .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                   .map(repair => (
-                    <Card key={repair.id}>
+                    <Card key={repair.id} className="card-hover">
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
@@ -226,7 +226,7 @@ export function RiderDashboard() {
                             <p>
                               <strong>Geschatte kosten:</strong> €{repair.repairCost?.toFixed(2) || "?"}
                             </p>
-                            <Button asChild className="mt-2 bg-orange-500 hover:bg-orange-600">
+                            <Button asChild className="mt-2 bg-orange-500 hover:bg-orange-600 button-hover">
                               <Link href={`/repair/${repair.id}/book`}>
                                 Nu boeken (€4)
                               </Link>
@@ -314,7 +314,7 @@ export function RiderDashboard() {
                   .filter(repair => ["COMPLETED", "CANCELLED"].includes(repair.status))
                   .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                   .map(repair => (
-                    <Card key={repair.id}>
+                    <Card key={repair.id} className="card-hover">
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>

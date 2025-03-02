@@ -6,8 +6,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Bicycle, CheckCircle, XCircle, AlertTriangle, Phone, MapPin, Euro, Clock } from "lucide-react";
+import { CheckCircle, XCircle, AlertTriangle, Phone, MapPin, Euro, Clock } from "lucide-react";
 import { loadStripe } from "@stripe/stripe-js";
+import Image from "next/image";
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -205,7 +206,7 @@ export function RepairDetails({ repair, userRole, userId }: RepairDetailsProps) 
               <div>
                 <h3 className="font-medium mb-2">Foto</h3>
                 <div className="rounded-md overflow-hidden border">
-                  <img 
+                  <Image
                     src={repair.imageUrl} 
                     alt="Bike issue" 
                     className="w-full h-auto max-h-64 object-cover"

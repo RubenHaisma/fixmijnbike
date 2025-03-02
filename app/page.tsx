@@ -5,13 +5,13 @@ import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {/* Hero Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-orange-50 to-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl text-orange-500">
+      <section className="hero-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
+            <div className="space-y-4">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl text-orange-500">
                 BikeFixNL
               </h1>
               <p className="text-xl font-semibold text-blue-600">
@@ -22,13 +22,13 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600">
+              <Button asChild size="lg" className="bg-orange-500 hover:bg-orange-600 button-hover">
                 <Link href="/repair">
                   <Bike className="mr-2 h-5 w-5" />
                   Repareer Mijn Fiets
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50">
+              <Button asChild size="lg" variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-50 button-hover">
                 <Link href="/become-fixer">
                   <Wrench className="mr-2 h-5 w-5" />
                   Word een Fixer
@@ -40,9 +40,9 @@ export default function Home() {
       </section>
 
       {/* How It Works */}
-      <section className="w-full py-12 md:py-24 bg-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
+      <section className="feature-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
                 Hoe het werkt
@@ -52,8 +52,8 @@ export default function Home() {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-              <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
+              <div className="flex flex-col items-center space-y-4 p-6 rounded-lg border border-gray-200 card-hover">
                 <div className="p-3 rounded-full bg-orange-100">
                   <Bike className="h-8 w-8 text-orange-500" />
                 </div>
@@ -63,7 +63,7 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
+              <div className="flex flex-col items-center space-y-4 p-6 rounded-lg border border-gray-200 card-hover">
                 <div className="p-3 rounded-full bg-blue-100">
                   <Wrench className="h-8 w-8 text-blue-600" />
                 </div>
@@ -73,7 +73,7 @@ export default function Home() {
                 </p>
               </div>
               
-              <div className="flex flex-col items-center space-y-2 p-4 rounded-lg border border-gray-200">
+              <div className="flex flex-col items-center space-y-4 p-6 rounded-lg border border-gray-200 card-hover">
                 <div className="p-3 rounded-full bg-red-100">
                   <Clock className="h-8 w-8 text-red-500" />
                 </div>
@@ -88,10 +88,10 @@ export default function Home() {
       </section>
 
       {/* Benefits */}
-      <section className="w-full py-12 md:py-24 bg-blue-50">
-        <div className="container px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-4">
+      <section className="testimonial-section">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+            <div className="space-y-6">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
                 Voordelen voor studenten
               </h2>
@@ -128,7 +128,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <Button asChild className="mt-4 bg-orange-500 hover:bg-orange-600">
+              <Button asChild className="mt-4 bg-orange-500 hover:bg-orange-600 button-hover">
                 <Link href="/signup">
                   Meld je nu aan
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -136,7 +136,7 @@ export default function Home() {
               </Button>
             </div>
             
-            <div className="relative h-[400px] rounded-lg overflow-hidden">
+            <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl">
               <Image 
                 src="https://images.unsplash.com/photo-1582559934361-5c0d5278b0e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                 alt="Student repairing a Bike"
@@ -150,29 +150,29 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="w-full py-12 md:py-24 bg-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
+      <section className="feature-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-blue-600">
               Wat studenten zeggen
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-              <div className="p-6 bg-orange-50 rounded-lg border border-orange-100">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 w-full">
+              <div className="p-6 bg-orange-50 rounded-lg border border-orange-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Mijn ketting was kapot en ik had geen idee hoe ik het moest repareren. Via BikeFixNL vond ik Joost die het binnen 20 minuten had opgelost voor maar €10!&quot;
                 </p>
                 <p className="font-semibold">Emma, UvA student</p>
               </div>
               
-              <div className="p-6 bg-blue-50 rounded-lg border border-blue-100">
+              <div className="p-6 bg-blue-50 rounded-lg border border-blue-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Als Fixer verdien ik nu ongeveer €150 per week extra. Perfect naast mijn studie en ik help er andere studenten mee.&quot;
                 </p>
                 <p className="font-semibold">Tim, TU Delft student</p>
               </div>
               
-              <div className="p-6 bg-red-50 rounded-lg border border-red-100">
+              <div className="p-6 bg-red-50 rounded-lg border border-red-100 card-hover">
                 <p className="italic text-gray-700 mb-4">
                   &quot;Lekke band op zondag en alle winkels dicht. Dankzij BikeFixNL kon ik dezelfde dag nog naar college fietsen!&quot;
                 </p>
@@ -184,9 +184,9 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="w-full py-12 md:py-24 bg-gradient-to-r from-orange-500 via-red-500 to-blue-600 text-white">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col items-center space-y-4 text-center">
+      <section className="cta-section">
+        <div className="container">
+          <div className="flex flex-col items-center space-y-6 max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl">
               Klaar om je fiets te laten repareren?
             </h2>
@@ -194,13 +194,13 @@ export default function Home() {
               Of wil je extra geld verdienen als student-fixer?
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="bg-white text-orange-500 hover:bg-gray-100">
+              <Button asChild size="lg" className="bg-white text-orange-500 hover:bg-gray-100 button-hover">
                 <Link href="/repair">
                   <Bike className="mr-2 h-5 w-5" />
                   Repareer Mijn Fiets
                 </Link>
               </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 button-hover">
                 <Link href="/become-fixer">
                   <Wrench className="mr-2 h-5 w-5" />
                   Word een Fixer

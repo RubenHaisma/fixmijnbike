@@ -24,20 +24,20 @@ export function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
-            <Bike className="h-6 w-6 text-orange-500 ml-2" />
+            <Bike className="h-6 w-6 text-orange-500" />
             <span className="text-xl font-bold text-orange-500">BikeFixNL</span>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <Link href="/repair" className="text-sm font-medium hover:text-orange-500">
+          <Link href="/repair" className="text-sm font-medium hover:text-orange-500 transition-colors">
             Reparatie Aanvragen
           </Link>
-          <Link href="/become-fixer" className="text-sm font-medium hover:text-orange-500">
+          <Link href="/become-fixer" className="text-sm font-medium hover:text-orange-500 transition-colors">
             Word een Fixer
           </Link>
-          <Link href="/how-it-works" className="text-sm font-medium hover:text-orange-500">
+          <Link href="/how-it-works" className="text-sm font-medium hover:text-orange-500 transition-colors">
             Hoe het werkt
           </Link>
           
@@ -48,17 +48,17 @@ export function Header() {
                   <User className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="w-56">
                 <DropdownMenuLabel>Mijn Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/dashboard">Dashboard</Link>
+                  <Link href="/dashboard" className="w-full cursor-pointer">Dashboard</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/profile">Profiel</Link>
+                  <Link href="/profile" className="w-full cursor-pointer">Profiel</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => signOut()}>
+                <DropdownMenuItem onClick={() => signOut()} className="cursor-pointer">
                   Uitloggen
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -87,24 +87,24 @@ export function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right">
-            <div className="flex flex-col gap-4 mt-8">
+            <div className="flex flex-col gap-6 mt-8">
               <Link 
                 href="/repair" 
-                className="text-lg font-medium hover:text-orange-500"
+                className="text-lg font-medium hover:text-orange-500 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Reparatie Aanvragen
               </Link>
               <Link 
                 href="/become-fixer" 
-                className="text-lg font-medium hover:text-orange-500"
+                className="text-lg font-medium hover:text-orange-500 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Word een Fixer
               </Link>
               <Link 
                 href="/how-it-works" 
-                className="text-lg font-medium hover:text-orange-500"
+                className="text-lg font-medium hover:text-orange-500 transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 Hoe het werkt
@@ -114,14 +114,14 @@ export function Header() {
                 <>
                   <Link 
                     href="/dashboard" 
-                    className="text-lg font-medium hover:text-orange-500"
+                    className="text-lg font-medium hover:text-orange-500 transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Dashboard
                   </Link>
                   <Link 
                     href="/profile" 
-                    className="text-lg font-medium hover:text-orange-500"
+                    className="text-lg font-medium hover:text-orange-500 transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     Profiel
@@ -137,8 +137,8 @@ export function Header() {
                   </Button>
                 </>
               ) : (
-                <div className="flex flex-col gap-2">
-                  <Button asChild variant="outline">
+                <div className="flex flex-col gap-4">
+                  <Button asChild variant="outline" className="w-full">
                     <Link 
                       href="/login"
                       onClick={() => setIsOpen(false)}
@@ -149,7 +149,7 @@ export function Header() {
                   </Button>
                   <Button 
                     asChild 
-                    className="bg-orange-500 hover:bg-orange-600"
+                    className="w-full bg-orange-500 hover:bg-orange-600"
                   >
                     <Link 
                       href="/signup"

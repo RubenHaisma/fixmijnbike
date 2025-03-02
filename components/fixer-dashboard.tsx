@@ -20,6 +20,7 @@ type Repair = {
   issueType: string;
   description: string | null;
   imageUrl: string | null;
+  updatedAt: string | null;
   status: string;
   postalCode: string;
   createdAt: string;
@@ -184,7 +185,7 @@ export function FixerDashboard() {
         </div>
         
         {walletBalance > 0 && (
-          <Button onClick={requestPayout} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={requestPayout} className="bg-blue-600 hover:bg-blue-700 button-hover">
             <Euro className="mr-2 h-4 w-4" />
             Uitbetaling aanvragen (€{walletBalance.toFixed(2)})
           </Button>
@@ -192,7 +193,7 @@ export function FixerDashboard() {
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <Card>
+        <Card className="card-hover">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Verdiensten</CardTitle>
             <CardDescription>Totaal verdiend</CardDescription>
@@ -213,7 +214,7 @@ export function FixerDashboard() {
           </CardFooter>
         </Card>
         
-        <Card>
+        <Card className="card-hover">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Reparaties</CardTitle>
             <CardDescription>Voltooide reparaties</CardDescription>
@@ -234,7 +235,7 @@ export function FixerDashboard() {
           </CardFooter>
         </Card>
         
-        <Card>
+        <Card className="card-hover">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg">Uitbetalingen</CardTitle>
             <CardDescription>In behandeling</CardDescription>
@@ -301,7 +302,7 @@ export function FixerDashboard() {
                   .filter(repair => ["MATCHED", "BOOKED"].includes(repair.status))
                   .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                   .map(repair => (
-                    <Card key={repair.id}>
+                    <Card key={repair.id} className="card-hover">
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
@@ -376,7 +377,7 @@ export function FixerDashboard() {
                         {repair.status === "BOOKED" && (
                           <Button 
                             size="sm" 
-                            className="bg-green-600 hover:bg-green-700"
+                            className="bg-green-600 hover:bg-green-700 button-hover"
                             onClick={() => markAsCompleted(repair.id)}
                           >
                             <CheckCircle className="h-4 w-4 mr-2" />
@@ -425,7 +426,7 @@ export function FixerDashboard() {
                   .filter(repair => ["COMPLETED", "CANCELLED"].includes(repair.status))
                   .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                   .map(repair => (
-                    <Card key={repair.id}>
+                    <Card key={repair.id} className="card-hover">
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>

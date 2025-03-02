@@ -12,6 +12,16 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'BikeFixNL - Fietsreparatie door studenten, voor studenten',
   description: 'Verbind studenten met fietsreparatie behoeften aan student "fixers" die extra geld verdienen',
+  keywords: 'fietsreparatie, studenten, bijverdienen, fietsenmaker, fiets repareren, goedkope fietsreparatie',
+  authors: [{ name: 'BikeFixNL Team' }],
+  openGraph: {
+    type: 'website',
+    locale: 'nl_NL',
+    url: 'https://bikefixnl.nl',
+    title: 'BikeFixNL - Fietsreparatie door studenten, voor studenten',
+    description: 'Verbind studenten met fietsreparatie behoeften aan student "fixers" die extra geld verdienen',
+    siteName: 'BikeFixNL',
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +40,7 @@ export default function RootLayout({
           >
             <div className="flex min-h-screen flex-col">
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 w-full">{children}</main>
               <Footer />
             </div>
             <Toaster />

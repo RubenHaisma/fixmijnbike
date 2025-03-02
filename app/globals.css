@@ -96,3 +96,48 @@
   border-style: solid;
   border-image: linear-gradient(to right, hsl(0, 100%, 50%), hsl(220, 100%, 50%), hsl(16, 100%, 50%)) 1;
 }
+
+/* Improved container classes */
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+}
+
+/* Center content properly */
+.center-content {
+  @apply flex flex-col items-center justify-center;
+}
+
+/* Responsive section padding */
+.section-padding {
+  @apply py-8 md:py-12 lg:py-16;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+}
+
+/* Button hover effects */
+.button-hover {
+  @apply transition-all duration-300 hover:shadow-md hover:-translate-y-0.5;
+}
+
+/* Hero section styling */
+.hero-section {
+  @apply w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-orange-50 to-white text-center;
+}
+
+/* Feature section styling */
+.feature-section {
+  @apply w-full py-12 md:py-24 bg-white text-center;
+}
+
+/* Testimonial section styling */
+.testimonial-section {
+  @apply w-full py-12 md:py-24 bg-blue-50 text-center;
+}
+
+/* CTA section styling */
+.cta-section {
+  @apply w-full py-12 md:py-24 bg-gradient-to-r from-orange-500 via-red-500 to-blue-600 text-white text-center;
+}

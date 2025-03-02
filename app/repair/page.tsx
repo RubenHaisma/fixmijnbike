@@ -6,6 +6,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   Form,
   FormControl,
@@ -102,14 +103,14 @@ export default function RepairRequestPage() {
   return (
     <div className="container max-w-3xl py-12">
       <div className="flex flex-col space-y-6">
-        <div className="flex flex-col space-y-2 text-center">
-          <div className="flex justify-center">
+        <div className="flex flex-col items-center space-y-4 text-center">
+          <div className="p-3 rounded-full bg-orange-100">
             <Bike className="h-10 w-10 text-orange-500" />
           </div>
           <h1 className="text-2xl font-semibold tracking-tight">
             Vraag een fietsreparatie aan
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground max-w-md">
             Vertel ons wat er mis is met je fiets en we vinden een student-fixer in jouw buurt
           </p>
         </div>
@@ -209,6 +210,7 @@ export default function RepairRequestPage() {
                             type="button"
                             variant="outline"
                             onClick={() => open()}
+                            className="w-full button-hover"
                           >
                             <Upload className="mr-2 h-4 w-4" />
                             Upload een foto
@@ -220,7 +222,7 @@ export default function RepairRequestPage() {
                         <Card className="overflow-hidden">
                           <CardContent className="p-2">
                             <div className="relative aspect-video">
-                              <img
+                              <Image
                                 src={imageUrl}
                                 alt="Uploaded bike issue"
                                 className="object-cover w-full h-full rounded-md"
@@ -248,7 +250,7 @@ export default function RepairRequestPage() {
 
             <Button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600"
+              className="w-full bg-orange-500 hover:bg-orange-600 button-hover"
               disabled={isLoading}
             >
               {isLoading ? "Bezig met aanvragen..." : "Reparatie aanvragen"}
