@@ -11,7 +11,7 @@ export default function PrivacyPage() {
         <section className="mb-8">
           <h2 className="text-xl font-semibold mb-4">1. Inleiding</h2>
           <p>
-            BikeFixNL respecteert je privacy en zet zich in voor de bescherming van je persoonsgegevens. 
+            FixMijnBike respecteert je privacy en zet zich in voor de bescherming van je persoonsgegevens. 
             Dit privacybeleid informeert je over hoe wij omgaan met je persoonsgegevens wanneer je onze 
             website bezoekt of gebruik maakt van onze diensten, en vertelt je over je privacyrechten en 
             hoe de wet je beschermt.
@@ -151,7 +151,7 @@ export default function PrivacyPage() {
             neem dan contact met ons op via:
           </p>
           <p className="mt-2">
-            E-mail: privacy@bikefixnl.nl<br />
+            E-mail: privacy@FixMijnBike.nl<br />
             Telefoon: +31 6 12345678
           </p>
         </section>

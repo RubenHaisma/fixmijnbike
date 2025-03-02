@@ -134,7 +134,7 @@ function SignupFormContent() {
           Maak een account aan
         </h1>
         <p className="text-sm text-muted-foreground">
-          Word lid van de BikeFixNL community
+          Word lid van de FixMijnBike community
         </p>
       </div>
 

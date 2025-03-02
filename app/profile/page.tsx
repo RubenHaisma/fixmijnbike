@@ -358,19 +358,19 @@ export default function ProfilePage() {
                 <h3 className="text-sm font-medium mb-2">Deel direct</h3>
                 <div className="flex gap-2">
                   <Button variant="outline" className="flex-1" onClick={() => {
-                    const text = `Repareer je fiets goedkoop met BikeFixNL! Gebruik mijn link voor €4 korting: ${typeof window !== 'undefined' ? window.location.origin : ''}/signup?ref=${user?.id}`;
+                    const text = `Repareer je fiets goedkoop met FixMijnBike! Gebruik mijn link voor €4 korting: ${typeof window !== 'undefined' ? window.location.origin : ''}/signup?ref=${user?.id}`;
                     window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
                   }}>
                     WhatsApp
                   </Button>
                   <Button variant="outline" className="flex-1" onClick={() => {
-                    const text = `Repareer je fiets goedkoop met BikeFixNL! Gebruik mijn link voor €4 korting: ${typeof window !== 'undefined' ? window.location.origin : ''}/signup?ref=${user?.id}`;
+                    const text = `Repareer je fiets goedkoop met FixMijnBike! Gebruik mijn link voor €4 korting: ${typeof window !== 'undefined' ? window.location.origin : ''}/signup?ref=${user?.id}`;
                     window.open(`https://t.me/share/url?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.origin : '')}/signup?ref=${user?.id}&text=${encodeURIComponent(text)}`, '_blank');
                   }}>
                     Telegram
                   </Button>
                   <Button variant="outline" className="flex-1" onClick={() => {
-                    const text = `Repareer je fiets goedkoop met BikeFixNL! Gebruik mijn link voor €4 korting: ${typeof window !== 'undefined' ? window.location.origin : ''}/signup?ref=${user?.id}`;
+                    const text = `Repareer je fiets goedkoop met FixMijnBike! Gebruik mijn link voor €4 korting: ${typeof window !== 'undefined' ? window.location.origin : ''}/signup?ref=${user?.id}`;
                     window.open(`mailto:?subject=€4 korting op fietsreparatie&body=${encodeURIComponent(text)}`, '_blank');
                   }}>
                     E-mail

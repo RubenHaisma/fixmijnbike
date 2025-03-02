@@ -187,7 +187,7 @@ export default function CookiesPage() {
             Als je vragen hebt over dit cookiebeleid, neem dan contact met ons op via:
           </p>
           <p className="mt-2">
-            E-mail: privacy@bikefixnl.nl<br />
+            E-mail: privacy@FixMijnBike.nl<br />
             Telefoon: +31 6 12345678
           </p>
         </section>

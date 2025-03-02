@@ -87,7 +87,7 @@ export default function LoginPage() {
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Welkom terug</CardTitle>
           <CardDescription>
-            Log in op je BikeFixNL account
+            Log in op je FixMijnBike account
           </CardDescription>
         </CardHeader>
         <CardContent>

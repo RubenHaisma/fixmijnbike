@@ -55,10 +55,10 @@ export default function RoleSelectionPage() {
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 max-w-3xl">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-3xl font-bold tracking-tight">
-            Welkom bij BikeFixNL!
+            Welkom bij FixMijnBike!
           </h1>
           <p className="text-muted-foreground">
-            Kies hoe je BikeFixNL wilt gebruiken
+            Kies hoe je FixMijnBike wilt gebruiken
           </p>
         </div>
 

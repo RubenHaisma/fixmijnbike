@@ -201,7 +201,7 @@ export default function RepairRequestPage() {
                         <FormControl>
                           <div className="space-y-4">
                             <CldUploadWidget
-                              uploadPreset="bikefixnl"
+                              uploadPreset="FixMijnBike"
                               onSuccess={(result: any) => {
                                 setImageUrl(result.info.secure_url);
                                 field.onChange(result.info.secure_url);
