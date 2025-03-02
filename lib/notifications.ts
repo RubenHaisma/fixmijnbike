@@ -42,8 +42,6 @@ export async function createNotification(data: NotificationData) {
       }
     }
 
-    // Here you would also implement push notifications if needed
-
     return notification;
   } catch (error) {
     console.error("Error creating notification:", error);
@@ -128,7 +126,7 @@ export async function notifyRepairRequest(repair: any) {
       userId: fixer.id,
       type: NotificationType.REPAIR_REQUEST,
       title: 'Nieuwe reparatie aanvraag',
-      message: `Er is een nieuwe reparatie aanvraag voor ${repair.issueType} in jouw buurt.`,
+      message: `Er is een nieuwe reparatie aanvraag voor ${repair.issueType} in jouw buurt. Bekijk de details en geef aan of je deze reparatie wilt uitvoeren.`,
       linkUrl: `/repair/${repair.id}`,
     });
   }
@@ -141,7 +139,7 @@ export async function notifyRepairMatched(repair: any) {
     senderId: repair.fixerId,
     type: NotificationType.REPAIR_MATCHED,
     title: 'Fixer gevonden!',
-    message: `We hebben een fixer gevonden voor je reparatie. Bekijk de details en boek nu.`,
+    message: `Een fixer heeft interesse in je reparatie. Wacht tot de fixer de reparatie accepteert, daarna kun je boeken.`,
     linkUrl: `/repair/${repair.id}`,
   });
 
@@ -152,7 +150,7 @@ export async function notifyRepairMatched(repair: any) {
       senderId: repair.riderId,
       type: NotificationType.REPAIR_MATCHED,
       title: 'Nieuwe reparatie match',
-      message: `Je bent gematcht met een nieuwe reparatie. Bekijk de details en accepteer of weiger.`,
+      message: `Je bent gematcht met een nieuwe reparatie. Bekijk de details en accepteer of weiger de reparatie.`,
       linkUrl: `/repair/${repair.id}`,
     });
   }
@@ -165,7 +163,7 @@ export async function notifyRepairAccepted(repair: any) {
     senderId: repair.fixerId,
     type: NotificationType.REPAIR_ACCEPTED,
     title: 'Reparatie geaccepteerd',
-    message: `De fixer heeft je reparatie geaccepteerd. Je kunt nu boeken.`,
+    message: `De fixer heeft je reparatie geaccepteerd! Je kunt nu de reparatie boeken door de platformkosten te betalen.`,
     linkUrl: `/repair/${repair.id}/book`,
   });
 }
@@ -190,7 +188,7 @@ export async function notifyRepairBooked(repair: any) {
       senderId: repair.riderId,
       type: NotificationType.REPAIR_BOOKED,
       title: 'Reparatie geboekt',
-      message: `Een reparatie is geboekt. Bekijk de details en contactgegevens.`,
+      message: `Een reparatie is geboekt! Je kunt nu contact opnemen met de klant om de reparatie in te plannen.`,
       linkUrl: `/repair/${repair.id}`,
     });
   }
@@ -203,7 +201,7 @@ export async function notifyRepairCompleted(repair: any) {
     senderId: repair.fixerId,
     type: NotificationType.REPAIR_COMPLETED,
     title: 'Reparatie voltooid',
-    message: `Je reparatie is voltooid. Bedankt voor het gebruik van FixMijnBike!`,
+    message: `Je reparatie is voltooid! Bedankt voor het gebruik van FixMijnBike. Laat een review achter voor je fixer.`,
     linkUrl: `/repair/${repair.id}`,
   });
 }

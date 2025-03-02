@@ -110,13 +110,13 @@ model PasswordResetToken {
 }
 
 enum RepairStatus {
-  PENDING
-  MATCHED
-  ACCEPTED
-  DECLINED
-  BOOKED
-  COMPLETED
-  CANCELLED
+  PENDING     // Initial state when repair is created
+  MATCHED     // When a fixer is matched but hasn't accepted yet
+  ACCEPTED    // When fixer accepts the repair
+  DECLINED    // When fixer declines the repair
+  BOOKED      // When rider pays platform fee
+  COMPLETED   // When repair is completed
+  CANCELLED   // When either party cancels
 }
 
 model Repair {
