@@ -45,7 +45,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Image 
-              src="/logo.png" 
+              src="/images/logo.png" 
               alt="FixMijnBike Logo" 
               width={40} 
               height={40} 
