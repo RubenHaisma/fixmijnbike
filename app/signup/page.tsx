@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Bike, User, Mail, Lock, Phone, MapPin, AlertCircle, CheckCircle, Wrench } from "lucide-react";
+import { Bike, User, Mail, Lock, Phone, MapPin, CheckCircle, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Link from "next/link";
 import { Slider } from "@/components/ui/slider";
