@@ -58,6 +58,11 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Ongeldige inloggegevens");
         }
 
+        // Check if email is verified
+        if (!user.emailVerified) {
+          throw new Error("E-mailadres is nog niet geverifieerd. Controleer je inbox.");
+        }
+
         const isCorrectPassword = await bcrypt.compare(
           credentials.password,
           user.password
@@ -73,6 +78,7 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: "/login",
+    error: "/login",
   },
   debug: process.env.NODE_ENV === "development",
   session: {

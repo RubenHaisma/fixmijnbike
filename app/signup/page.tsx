@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Bike, User, Mail, Lock, Phone, MapPin, AlertCircle } from "lucide-react";
+import { Bike, User, Mail, Lock, Phone, MapPin, AlertCircle, CheckCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import Link from "next/link";
 
@@ -86,40 +86,10 @@ function SignupFormContent() {
         return;
       }
 
-      setSuccess(data.message || "Account succesvol aangemaakt!");
-
-      const result = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-      });
-
-      if (result?.error) {
-        setError("Registratie succesvol, maar inloggen mislukt. Probeer handmatig in te loggen.");
-        return;
-      }
-
-      if (values.referralCode) {
-        try {
-          await fetch("/api/referrals", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ referralCode: values.referralCode }),
-          });
-        } catch (error) {
-          console.error("Error applying referral:", error);
-        }
-      }
-
-      if (values.role === "FIXER") {
-        router.push("/onboarding/fixer");
-      } else {
-        router.push("/dashboard");
-      }
+      setSuccess(data.message || "Account succesvol aangemaakt! Controleer je e-mail om je account te verifiëren.");
       
-      router.refresh();
+      // Don't sign in automatically - require email verification first
+      router.push("/login?success=verification_sent");
     } catch (error) {
       setError("Er is een fout opgetreden. Probeer het later opnieuw.");
     } finally {
@@ -150,7 +120,7 @@ function SignupFormContent() {
 
       {success && (
         <Alert className="bg-green-50 border-green-200">
-          <AlertCircle className="h-4 w-4 text-green-600" />
+          <CheckCircle className="h-4 w-4 text-green-600" />
           <AlertDescription className="text-green-800">{success}</AlertDescription>
         </Alert>
       )}
@@ -178,7 +148,6 @@ function SignupFormContent() {
             )}
           />
           
-          {/* Rest of the form fields remain the same */}
           <FormField
             control={form.control}
             name="email"
