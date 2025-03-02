@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { generateVerificationToken, sendVerificationEmail } from "@/lib/email";
 
 const prisma = new PrismaClient();
 
@@ -82,6 +83,10 @@ export async function POST(request: Request) {
       },
     });
     
+    // Generate verification token and send verification email
+    const verificationToken = await generateVerificationToken(user.id);
+    await sendVerificationEmail(email, verificationToken);
+    
     // Remove password from response
     const { password: _, ...userWithoutPassword } = user;
     
@@ -89,8 +94,8 @@ export async function POST(request: Request) {
       { 
         user: userWithoutPassword,
         message: isDutchStudentEmail 
-          ? "Account aangemaakt! Als student krijg je je eerste boeking gratis." 
-          : "Account aangemaakt!"
+          ? "Account aangemaakt! Controleer je e-mail om je account te verifiëren. Als student krijg je je eerste boeking gratis." 
+          : "Account aangemaakt! Controleer je e-mail om je account te verifiëren."
       },
       { status: 201 }
     );

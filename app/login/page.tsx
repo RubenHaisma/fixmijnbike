@@ -144,6 +144,14 @@ function LoginFormContent() {
               </FormItem>
             )}
           />
+          <div className="flex justify-end">
+            <Link 
+              href="/forgot-password" 
+              className="text-sm text-blue-600 hover:underline"
+            >
+              Wachtwoord vergeten?
+            </Link>
+          </div>
           <Button
             type="submit"
             className="w-full bg-orange-500 hover:bg-orange-600 button-hover"
