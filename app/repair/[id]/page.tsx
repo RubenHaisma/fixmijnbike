@@ -1,23 +1,32 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { PrismaClient } from "@prisma/client";
 import { RepairDetails } from "@/components/repair-details";
 
+interface PageParams {
+  id: string;
+}
+
+interface Props {
+  params: Promise<PageParams>;
+}
+
 const prisma = new PrismaClient();
 
-export default async function RepairDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
+export default async function RepairDetailsPage({ params: paramsPromise }: Props) {
   const session = await getServerSession(authOptions);
   
   if (!session || !session.user) {
     redirect("/login");
   }
   
-  // Fetch repair details
+  // Since we redirect if !session.user, we can safely assert id exists
+  const userId = session.user.id as string;
+  const userRole = session.user.role as string;
+  
+  const params = await paramsPromise;
+  
   const repair = await prisma.repair.findUnique({
     where: {
       id: params.id,
@@ -49,15 +58,14 @@ export default async function RepairDetailsPage({
     redirect("/dashboard");
   }
   
-  // Check if user is authorized to view this repair
   const isAuthorized = 
-    session.user.role === "ADMIN" || 
-    repair.riderId === session.user.id || 
-    repair.fixerId === session.user.id;
+    userRole === "ADMIN" || 
+    repair.riderId === userId || 
+    repair.fixerId === userId;
   
   if (!isAuthorized) {
     redirect("/dashboard");
   }
   
-  return <RepairDetails repair={repair} userRole={session.user.role} userId={session.user.id} />;
+  return <RepairDetails repair={repair} userRole={userRole} userId={userId} />;
 }

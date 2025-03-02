@@ -16,7 +16,17 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
-export default function BookRepairPage({ params }: { params: { id: string } }) {
+// Define the params interface
+interface PageParams {
+  id: string;
+}
+
+// Define the props type explicitly for Next.js dynamic route
+interface Props {
+  params: Promise<PageParams>;
+}
+
+export default function BookRepairPage({ params: paramsPromise }: Props) {
   const router = useRouter();
   const { data: session } = useSession();
   const [repair, setRepair] = useState<any>(null);
@@ -24,8 +34,20 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [walletBalance, setWalletBalance] = useState(0);
+  const [params, setParams] = useState<PageParams | null>(null);
+
+  // Resolve the params promise
+  useEffect(() => {
+    const resolveParams = async () => {
+      const resolvedParams = await paramsPromise;
+      setParams(resolvedParams);
+    };
+    resolveParams();
+  }, [paramsPromise]);
 
   useEffect(() => {
+    if (!params) return;
+
     async function fetchData() {
       try {
         if (!session) {
@@ -34,7 +56,7 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
         }
 
         const [repairRes, userRes] = await Promise.all([
-          fetch(`/api/repairs/${params.id}`),
+          fetch(`/api/repairs/${params?.id}`),
           fetch("/api/users/me")
         ]);
         
@@ -46,7 +68,7 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
         setRepair(repairData);
         
         if (repairData.status !== "MATCHED") {
-          router.push(`/repair/${params.id}`);
+          router.push(`/repair/${params?.id || ''}`);
           return;
         }
         
@@ -68,9 +90,11 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
     }
     
     fetchData();
-  }, [session, router, params.id]);
+  }, [session, router, params]);
 
   async function handlePayment() {
+    if (!params) return;
+
     setIsProcessing(true);
     setError(null);
     
@@ -137,7 +161,7 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
     "other": "Anders"
   };
 
-  if (isLoading) {
+  if (isLoading || !params) {
     return (
       <div className="container max-w-3xl py-12">
         <div className="flex flex-col space-y-6">
@@ -243,7 +267,7 @@ export default function BookRepairPage({ params }: { params: { id: string } }) {
               className="w-full sm:w-auto" 
               asChild
             >
-              <Link href={`/repair/${params.id}`}>
+              <Link href={`/repair/${params?.id || ''}`}>
                 Terug
               </Link>
             </Button>

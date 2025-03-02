@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import { RiderDashboard } from "@/components/rider-dashboard";
 import { FixerDashboard } from "@/components/fixer-dashboard";
 import { AdminDashboard } from "@/components/admin-dashboard";

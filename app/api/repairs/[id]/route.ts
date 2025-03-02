@@ -1,15 +1,24 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
-) {
+// Define the params interface
+interface Params {
+  id: string;
+}
+
+// Define the context type for the route handler
+interface Context {
+  params: Promise<Params>;
+}
+
+export async function GET(request: Request, context: Context) {
   try {
+    // Resolve the params Promise
+    const params = await context.params;
     const session = await getServerSession(authOptions);
     
     if (!session || !session.user) {
