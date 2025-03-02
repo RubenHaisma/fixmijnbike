@@ -120,6 +120,50 @@ const emailTemplate = (content: string) => `
   </html>
 `;
 
+
+export const verifyEmail = async (token: string) => {
+  // Find the verification token in the database
+  const verificationToken = await prisma.verificationToken.findFirst({
+    where: {
+      token,
+    },
+  });
+
+  // Check if token exists
+  if (!verificationToken) {
+    throw new Error("Invalid token");
+  }
+
+  // Check if token is expired
+  if (verificationToken.expires < new Date()) {
+    // Optionally delete the expired token
+    await prisma.verificationToken.delete({
+      where: {
+        id: verificationToken.id,
+      },
+    });
+    throw new Error("Token expired");
+  }
+
+  // Update the user's email verification status
+  await prisma.user.update({
+    where: {
+      id: verificationToken.identifier,
+    },
+    data: {
+      emailVerified: new Date(),
+    },
+  });
+
+  // Delete the used token
+  await prisma.verificationToken.delete({
+    where: {
+      id: verificationToken.id,
+    },
+  });
+};
+
+
 // Send verification email
 export const sendVerificationEmail = async (email: string, token: string) => {
   const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
