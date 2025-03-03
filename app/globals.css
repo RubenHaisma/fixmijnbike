@@ -40,11 +40,6 @@
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 25 100% 50%;
-    --chart-1: 25 100% 50%; /* Warm Orange */
-    --chart-2: 200 70% 50%; /* Friendly Blue */
-    --chart-3: 340 80% 55%; /* Vibrant Pink */
-    --chart-4: 0 0% 100%; /* White */
-    --chart-5: 0 0% 0%; /* Black */
     --radius: 0.75rem;
   }
   .dark {
@@ -70,11 +65,6 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 25 80% 45%;
-    --chart-1: 25 80% 45%; /* Warm Orange */
-    --chart-2: 200 60% 45%; /* Friendly Blue */
-    --chart-3: 340 70% 50%; /* Vibrant Pink */
-    --chart-4: 0 0% 80%; /* Light gray */
-    --chart-5: 0 0% 20%; /* Dark gray */
   }
 }
 
@@ -92,42 +82,123 @@
   }
 }
 
-.personal-gradient {
-  background: linear-gradient(135deg, hsl(340, 80%, 55%) 0%, hsl(0, 0%, 100%) 33%, hsl(200, 70%, 50%) 66%, hsl(25, 100%, 50%) 100%);
+/* Modern UI Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
-.personal-border {
-  border-width: 3px;
-  border-style: solid;
-  border-image: linear-gradient(to right, hsl(340, 80%, 55%), hsl(200, 70%, 50%), hsl(25, 100%, 50%)) 1;
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
 }
 
-/* Improved container classes */
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modern UI Classes */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modern Card Hover Effects */
+.hover-card {
+  transition: all 0.3s ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Modern Button Effects */
+.button-modern {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-modern::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: all 0.5s ease;
+}
+
+.button-modern:hover::after {
+  left: 100%;
+}
+
+/* Improved Container Classes */
 .container {
   @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
 }
 
-/* Center content properly */
+/* Center Content Properly */
 .center-content {
   @apply flex flex-col items-center justify-center;
 }
 
-/* Responsive section padding */
+/* Responsive Section Padding */
 .section-padding {
   @apply py-8 md:py-12 lg:py-16;
 }
 
-/* Card hover effects */
+/* Card Hover Effects */
 .card-hover {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
 }
 
-/* Button hover effects */
+/* Button Hover Effects */
 .button-hover {
   @apply transition-all duration-300 hover:shadow-md hover:-translate-y-0.5;
 }
 
-/* Hero section styling */
+/* Hero Section Styling */
 .hero-section {
   @apply w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-orange-50 to-white text-center;
   background-image: 
@@ -137,7 +208,7 @@
   background-position: center;
 }
 
-/* Feature section styling */
+/* Feature Section Styling */
 .feature-section {
   @apply w-full py-12 md:py-24 bg-white text-center;
   background-image: 
@@ -145,7 +216,7 @@
   background-size: 20px 20px;
 }
 
-/* Testimonial section styling */
+/* Testimonial Section Styling */
 .testimonial-section {
   @apply w-full py-12 md:py-24 bg-blue-50 text-center;
   background-image: 
@@ -155,7 +226,7 @@
   background-position: center;
 }
 
-/* CTA section styling */
+/* CTA Section Styling */
 .cta-section {
   @apply w-full py-12 md:py-24 text-white text-center;
   background-image: 
@@ -165,32 +236,32 @@
   background-position: center;
 }
 
-/* Loading spinner */
+/* Loading Spinner */
 .loading-spinner {
   @apply animate-spin h-5 w-5 text-white;
 }
 
-/* Improved form styling */
+/* Improved Form Styling */
 .form-container {
   @apply max-w-md mx-auto p-6 bg-white rounded-lg shadow-md;
 }
 
-/* Responsive image container */
+/* Responsive Image Container */
 .img-container {
   @apply relative overflow-hidden rounded-lg shadow-md;
 }
 
-/* Accessibility improvements */
+/* Accessibility Improvements */
 .sr-only {
   @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
 }
 
-/* Focus styles for better accessibility */
+/* Focus Styles for Better Accessibility */
 .focus-ring {
   @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary;
 }
 
-/* Personal touch elements */
+/* Personal Touch Elements */
 .personal-card {
   @apply rounded-xl border border-orange-200 bg-white shadow-sm hover:shadow-md transition-all duration-300;
 }
