@@ -20,10 +20,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://fixmijnbike.nl'),
   title: {
-    default: 'Fiets Laten Maken | Goedkope Fietsreparatie door Studenten | FixMijnBike',
-    template: '%s | FixMijnBike - Betaalbare Fietsreparatie'
+    default: 'Fiets Laten Maken in Nederland | Goedkope Fietsreparatie door Studenten | FixMijnBike',
+    template: '%s | FixMijnBike - Betaalbare Fietsreparatie in %s'
   },
-  description: 'Laat je fiets goedkoop repareren door studenten in jouw buurt ⭐ Vanaf €5/uur ✅ Direct gematcht ⚡ Binnen 24 uur gerepareerd 🚲 Lekke band, remmen, ketting en meer!',
+  description: 'Laat je fiets goedkoop repareren in heel Nederland 🚲 Actief in Amsterdam, Rotterdam, Utrecht, Den Haag en meer! Vanaf €15/uur - Direct gematcht ⚡',
   keywords: [
     'fiets laten maken',
     'fietsreparatie',
@@ -53,7 +53,37 @@ export const metadata: Metadata = {
     'fiets service',
     'fiets monteur',
     'fiets reparatie kosten',
-    'fiets reparatie student'
+    'fiets reparatie student',
+    'fiets maken utrecht',
+    'fiets reparatie utrecht',
+    'fietsenmaker utrecht centrum',
+    'fiets maken amsterdam',
+    'fiets reparatie amsterdam',
+    'fietsenmaker amsterdam centrum',
+    'fiets maken rotterdam',
+    'fiets reparatie rotterdam',
+    'fietsenmaker rotterdam centrum',
+    'fiets maken den haag',
+    'fiets reparatie den haag',
+    'fietsenmaker den haag centrum',
+    'fiets maken groningen',
+    'fiets reparatie groningen',
+    'fietsenmaker groningen centrum',
+    'fiets maken eindhoven',
+    'fiets reparatie eindhoven',
+    'fietsenmaker eindhoven centrum',
+    'goedkope fietsenmaker utrecht',
+    'goedkope fietsenmaker amsterdam',
+    'goedkope fietsenmaker rotterdam',
+    'student fietsenmaker utrecht',
+    'student fietsenmaker amsterdam',
+    'student fietsenmaker rotterdam',
+    'fietsreparatie aan huis utrecht',
+    'fietsreparatie aan huis amsterdam',
+    'fietsreparatie aan huis rotterdam',
+    'lekke band utrecht',
+    'lekke band amsterdam',
+    'lekke band rotterdam'
   ],
   authors: [{ name: 'FixMijnBike Team' }],
   creator: 'FixMijnBike',
@@ -149,7 +179,41 @@ export default function RootLayout({
               "name": "FixMijnBike",
               "url": "https://fixmijnbike.nl",
               "logo": "https://fixmijnbike.nl/images/logo.png",
-              "description": "Betaalbare fietsreparatie door studenten, voor studenten",
+              "description": "Betaalbare fietsreparatie door studenten, voor studenten in heel Nederland",
+              "areaServed": [
+                {
+                  "@type": "City",
+                  "name": "Amsterdam",
+                  "containedInPlace": {
+                    "@type": "Country",
+                    "name": "Netherlands"
+                  }
+                },
+                {
+                  "@type": "City",
+                  "name": "Utrecht",
+                  "containedInPlace": {
+                    "@type": "Country",
+                    "name": "Netherlands"
+                  }
+                },
+                {
+                  "@type": "City",
+                  "name": "Rotterdam",
+                  "containedInPlace": {
+                    "@type": "Country",
+                    "name": "Netherlands"
+                  }
+                },
+                {
+                  "@type": "City",
+                  "name": "Den Haag",
+                  "containedInPlace": {
+                    "@type": "Country",
+                    "name": "Netherlands"
+                  }
+                }
+              ],
               "sameAs": [
                 "https://facebook.com/fixmijnbike",
                 "https://instagram.com/fixmijnbike",
