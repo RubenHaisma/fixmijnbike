@@ -29,7 +29,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { Bike, Upload, AlertCircle, Image as ImageIcon, ArrowRight } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
-import { motion } from "framer-motion"; // Added for animations
+import { motion } from "framer-motion";
 
 const bikeIssues = [
   { value: "flat-tire", label: "Lekke band" },

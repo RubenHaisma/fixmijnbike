@@ -3,55 +3,85 @@
   <url>
     <loc>https://fixmijnbike.nl/</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://fixmijnbike.nl/repair</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
   </url>
   <url>
     <loc>https://fixmijnbike.nl/become-fixer</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://fixmijnbike.nl/how-it-works</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fixmijnbike.nl/login</loc>
+    <loc>https://fixmijnbike.nl/fiets-reparatie-amsterdam</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://fixmijnbike.nl/signup</loc>
+    <loc>https://fixmijnbike.nl/fiets-reparatie-utrecht</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fixmijnbike.nl/fiets-reparatie-rotterdam</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fixmijnbike.nl/fiets-reparatie-groningen</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fixmijnbike.nl/lekke-band</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fixmijnbike.nl/fiets-remmen</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fixmijnbike.nl/fiets-ketting</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fixmijnbike.nl/terms</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://fixmijnbike.nl/privacy</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://fixmijnbike.nl/cookies</loc>
     <lastmod>2025-05-01</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 </urlset>

@@ -1,23 +1,50 @@
 {
-    "name": "FixMijnBike",
-    "short_name": "FixMijnBike",
-    "description": "Betaalbare fietsreparatie door studenten, voor studenten",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#ff8a00",
-    "icons": [
-      {
-        "src": "/icon-192.png",
-        "sizes": "192x192",
-        "type": "image/png",
-        "purpose": "any maskable"
-      },
-      {
-        "src": "/icon-512.png",
-        "sizes": "512x512",
-        "type": "image/png",
-        "purpose": "any maskable"
-      }
-    ]
-  }
+  "name": "FixMijnBike - Goedkope Fietsreparatie door Studenten",
+  "short_name": "FixMijnBike",
+  "description": "Laat je fiets goedkoop repareren door studenten in jouw buurt. Vanaf €5/uur, binnen 24 uur gerepareerd!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ff8a00",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "categories": ["lifestyle", "utilities", "transportation"],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    },
+    {
+      "src": "/screenshots/repair.png",
+      "sizes": "1280x720",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Reparatie Aanvragen",
+      "url": "/repair",
+      "icons": [{ "src": "/icons/repair.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Word een Fixer",
+      "url": "/become-fixer",
+      "icons": [{ "src": "/icons/fixer.png", "sizes": "96x96" }]
+    }
+  ]
+}

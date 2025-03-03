@@ -2,9 +2,21 @@
 User-agent: *
 Allow: /
 
-# Disallow admin paths
+# Disallow admin and API paths
 Disallow: /dashboard/admin/
 Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /profile
+Disallow: /notifications
+
+# Allow important pages
+Allow: /repair
+Allow: /become-fixer
+Allow: /how-it-works
+Allow: /terms
+Allow: /privacy
+Allow: /cookies
 
 # Sitemap
 Sitemap: https://fixmijnbike.nl/sitemap.xml

@@ -20,11 +20,41 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://fixmijnbike.nl'),
   title: {
-    default: 'FixMijnBike - Persoonlijke fietsreparatie door studenten, voor studenten',
-    template: '%s | FixMijnBike'
+    default: 'Fiets Laten Maken | Goedkope Fietsreparatie door Studenten | FixMijnBike',
+    template: '%s | FixMijnBike - Betaalbare Fietsreparatie'
   },
-  description: 'Betaalbare fietsreparatie door studenten, voor studenten. Lekke band? Piepende remmen? Vind een student-fixer in jouw buurt die je snel en betaalbaar helpt.',
-  keywords: ['fietsreparatie', 'studenten', 'bijverdienen', 'fietsenmaker', 'fiets repareren', 'goedkope fietsreparatie', 'lekke band', 'fiets kapot', 'fiets onderhoud'],
+  description: 'Laat je fiets goedkoop repareren door studenten in jouw buurt ⭐ Vanaf €5/uur ✅ Direct gematcht ⚡ Binnen 24 uur gerepareerd 🚲 Lekke band, remmen, ketting en meer!',
+  keywords: [
+    'fiets laten maken',
+    'fietsreparatie',
+    'fietsenmaker',
+    'fiets reparatie student',
+    'fietsenmaker student',
+    'fietsenmaker studenten',
+    'fietsenmaker goedkoop',
+    'band laten plakken fiets',
+    'fiets reparatie',
+    'goedkope fietsenmaker',
+    'fiets repareren',
+    'lekke band',
+    'fiets kapot',
+    'student fietsenmaker',
+    'fiets onderhoud',
+    'fietsreparatie aan huis',
+    'fietsenmaker in de buurt',
+    'fietsenmaker studenten',
+    'fietsenmaker utrecht',
+    'fietsenmaker amsterdam',
+    'fietsenmaker rotterdam',
+    'fietsenmaker den haag',
+    'fietsenmaker eindhoven',
+    'fietsenmaker groningen',
+    'goedkope fietsreparatie',
+    'fiets service',
+    'fiets monteur',
+    'fiets reparatie kosten',
+    'fiets reparatie student'
+  ],
   authors: [{ name: 'FixMijnBike Team' }],
   creator: 'FixMijnBike',
   publisher: 'FixMijnBike',
@@ -48,48 +78,36 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'nl_NL',
     url: 'https://fixmijnbike.nl',
-    title: 'FixMijnBike - Persoonlijke fietsreparatie door studenten, voor studenten',
-    description: 'Betaalbare fietsreparatie door studenten, voor studenten. Lekke band? Piepende remmen? Vind een student-fixer in jouw buurt die je snel en betaalbaar helpt.',
+    title: 'Fiets Laten Maken | Goedkope Fietsreparatie door Studenten | FixMijnBike',
+    description: 'Laat je fiets goedkoop repareren door studenten in jouw buurt ⭐ Vanaf €5/uur ✅ Direct gematcht ⚡ Binnen 24 uur gerepareerd 🚲 Lekke band, remmen, ketting en meer!',
     siteName: 'FixMijnBike',
     images: [
       {
-        url: '/og-image.jpg',
+        url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'FixMijnBike - Fietsreparatie door studenten',
+        alt: 'FixMijnBike - Goedkope Fietsreparatie door Studenten',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'FixMijnBike - Persoonlijke fietsreparatie door studenten, voor studenten',
-    description: 'Betaalbare fietsreparatie door studenten, voor studenten. Vind een student-fixer in jouw buurt.',
+    title: 'Fiets Laten Maken | Goedkope Fietsreparatie door Studenten',
+    description: 'Laat je fiets goedkoop repareren door studenten in jouw buurt. Vanaf €5/uur, binnen 24 uur gerepareerd!',
     images: ['/og-image.jpg'],
     creator: '@fixmijnbike',
   },
-  icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
-    other: [
-      {
-        rel: 'mask-icon',
-        url: '/safari-pinned-tab.svg',
-      },
-    ],
-  },
-  manifest: '/manifest.json',
   alternates: {
     canonical: 'https://fixmijnbike.nl',
     languages: {
       'nl-NL': 'https://fixmijnbike.nl',
     },
+  },
+  verification: {
+    google: 'your-google-verification-code',
+  },
+  other: {
+    'google-site-verification': 'your-google-verification-code',
   },
 };
 
@@ -100,6 +118,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="nl" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link rel="preload" as="image" href="/images/logo.png" />
+      </head>
       <body className={inter.className}>
         <AuthProvider>
           <ThemeProvider
@@ -116,17 +139,45 @@ export default function RootLayout({
           </ThemeProvider>
         </AuthProvider>
         
-        {/* Google Analytics - Replace with your actual GA ID */}
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "FixMijnBike",
+              "url": "https://fixmijnbike.nl",
+              "logo": "https://fixmijnbike.nl/images/logo.png",
+              "description": "Betaalbare fietsreparatie door studenten, voor studenten",
+              "sameAs": [
+                "https://facebook.com/fixmijnbike",
+                "https://instagram.com/fixmijnbike",
+                "https://twitter.com/fixmijnbike"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+31-6-12345678",
+                "contactType": "customer service",
+                "availableLanguage": ["Dutch", "English"]
+              }
+            })
+          }}
+        />
+        
+        {/* Google Analytics */}
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-N24ZGRTH90"
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-N24ZGRTH90');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', {
+              page_path: window.location.pathname,
+            });
           `}
         </Script>
       </body>
