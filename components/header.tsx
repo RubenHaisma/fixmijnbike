@@ -68,6 +68,9 @@ export function Header() {
           <Link href="/how-it-works" className="text-sm font-medium hover:text-primary transition-colors">
             Hoe het werkt
           </Link>
+          <Link href="/blog" className="text-sm font-medium hover:text-primary transition-colors">
+            Blog
+          </Link>
           
           {session ? (
             <div className="flex items-center gap-2">
@@ -143,6 +146,13 @@ export function Header() {
                 onClick={() => setIsOpen(false)}
               >
                 Hoe het werkt
+              </Link>
+              <Link 
+                href="/blog" 
+                className="text-lg font-medium hover:text-primary transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Blog
               </Link>
               
               {session ? (

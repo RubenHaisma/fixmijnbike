@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Metadata } from 'next';
@@ -7,29 +9,12 @@ import { Wrench, ArrowRight, Clock, User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
 
-export const metadata: Metadata = {
-  title: 'Fiets Reparatie Blog | Tips & Handleidingen | FixMijnBike',
-  description: 'Leer zelf je fiets te repareren met onze uitgebreide handleidingen. Van lekke band tot kapotte remmen. Kom je er niet uit? Boek een fixer!',
-  keywords: [
-    'fiets reparatie handleiding',
-    'fiets reparatie tips',
-    'zelf fiets maken',
-    'lekke band plakken',
-    'fiets onderhoud tips',
-    'fiets reparatie blog',
-    'fiets reparatie gids',
-    'fiets reparatie instructies',
-    'fiets reparatie hulp',
-    'fiets reparatie advies'
-  ],
-};
-
 const blogPosts = [
   {
     slug: 'lekke-band-repareren',
     title: 'Lekke Band Repareren: Stap voor Stap Handleiding',
     description: 'Leer hoe je zelf een lekke band kunt plakken of vervangen. Met deze handleiding kun je in 15-30 minuten weer op weg zijn.',
-    image: '/images/blog/flat-tire.jpg',
+    image: '/images/tire-removal.jpg',
     category: 'Reparatie',
     readTime: '8 min',
     author: 'Tim',
@@ -39,7 +24,7 @@ const blogPosts = [
     slug: 'fiets-remmen-afstellen',
     title: 'Fietsremmen Afstellen: Zo Doe Je Dat Zelf',
     description: 'Piepende of slecht werkende remmen? Leer hoe je je remmen perfect kunt afstellen voor optimale veiligheid.',
-    image: '/images/blog/brakes.jpg',
+    image: '/images/brakes.jpg',
     category: 'Onderhoud',
     readTime: '10 min',
     author: 'Lisa',
@@ -49,7 +34,7 @@ const blogPosts = [
     slug: 'ketting-smeren-vervangen',
     title: 'Fietsketting Smeren en Vervangen: Complete Gids',
     description: 'Een goed onderhouden ketting is essentieel voor je fiets. Ontdek hoe je je ketting kunt smeren en wanneer deze vervangen moet worden.',
-    image: '/images/blog/chain.jpg',
+    image: '/images/chain.jpg',
     category: 'Onderhoud',
     readTime: '12 min',
     author: 'Martijn',
@@ -59,7 +44,7 @@ const blogPosts = [
     slug: 'versnellingen-afstellen',
     title: 'Fietsversnellingen Afstellen: Tips & Tricks',
     description: 'Schakel je niet meer soepel? Met deze handleiding leer je hoe je je versnellingen zelf kunt afstellen.',
-    image: '/images/blog/gears.jpg',
+    image: '/images/gears.jpg',
     category: 'Reparatie',
     readTime: '15 min',
     author: 'Tim',
@@ -69,7 +54,7 @@ const blogPosts = [
     slug: 'fiets-onderhoud-tips',
     title: '10 Essentiële Fiets Onderhoudstips',
     description: 'Voorkom problemen met deze belangrijke onderhoudstips. Een goed onderhouden fiets gaat jaren langer mee!',
-    image: '/images/blog/maintenance.jpg',
+    image: '/images/maintenance.jpg',
     category: 'Onderhoud',
     readTime: '7 min',
     author: 'Lisa',
@@ -79,7 +64,7 @@ const blogPosts = [
     slug: 'fietsverlichting-repareren',
     title: 'Fietsverlichting Repareren en Vervangen',
     description: 'Kapotte verlichting? Ontdek hoe je zelf je fietsverlichting kunt repareren of vervangen. Veiligheid eerst!',
-    image: '/images/blog/lights.jpg',
+    image: '/images/lights.jpg',
     category: 'Reparatie',
     readTime: '8 min',
     author: 'Martijn',
@@ -115,7 +100,7 @@ export default function BlogPage() {
           <div className="grid md:grid-cols-2 gap-6">
             <div className="relative h-[300px] md:h-auto">
               <Image
-                src="/images/blog/flat-tire.jpg"
+                src="/images/flat-tire.jpg"
                 alt="Lekke band repareren"
                 fill
                 className="object-cover"
